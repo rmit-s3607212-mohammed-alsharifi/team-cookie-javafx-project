@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-public class User 
+public class User
 {
 //	private static final int NUMBEROFUSERS = 50;
 	

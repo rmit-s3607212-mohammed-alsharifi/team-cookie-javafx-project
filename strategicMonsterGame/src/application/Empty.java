@@ -9,7 +9,7 @@ public class Empty extends Cell
 	public Empty (int x , int y)
 	{
 		
-		this.id = "EMPTY";
+		this.id = "EMPTY"; //id. Look this up!
 		xPosition = x;
 		yPosition = y;	
 	}

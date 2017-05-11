@@ -2,30 +2,37 @@ package application;
 	
 import java.util.Scanner;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
 
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+//import javafx.application.Application;
+//import javafx.stage.Stage;
+
+//import javafx.scene.Scene;
+//import javafx.scene.layout.BorderPane;
 
 
-public class Main extends Application {
+//public class Main //extends Application 
+//{
 	
 	// Graphical Interface
-	@Override
-	public void start(Stage primaryStage) {
-		try {
-			BorderPane root = new BorderPane();
-			Scene scene = new Scene(root,400,400);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	@Override
+	//public void start(Stage primaryStage) {
+	//	try {
+	//		BorderPane root = new BorderPane();
+	//		Scene scene = new Scene(root,400,400);
+	//		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	//		primaryStage.setScene(scene);
+	//		primaryStage.show();
+	//	} catch(Exception e) {
+	//		e.printStackTrace();
+	//	}
+//	}
 	
-	
+	public class Main
+	{
+		int crap;
+
+		Cell cellref = new Cell();
+		//Hero heroref = new Hero();
 	
 	//
 	static User user = new User();
@@ -68,7 +75,8 @@ public class Main extends Application {
                      break;
             case 3:  adminLogin();
             		 break;         
-            case 4:  System.out.println("Game Started :)");
+            case 4:  //System.out.println("Game Started :)");
+            		runGame();
                      break;
             case 5:  System.out.println("Good Bye!");
             		 user.printUsers();
@@ -257,6 +265,17 @@ private static boolean userLogin()
 	{
 		Cell cell = new Cell();
 		cell.printGrid(cell.fillGrid(cell.initGrid()));
+		
+		int dirChoice;
+		
+		System.out.println("Press one to go up!");
+		dirChoice = Integer.parseInt(reader.nextLine());
+		
+		switch(dirChoice)
+		{
+			case 1: cell.heroMoveUp();
+			cell.printGrid(cell.fillGrid(cell.initGrid()));
+		}
 	}
 
 	
