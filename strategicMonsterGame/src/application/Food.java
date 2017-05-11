@@ -9,3 +9,4 @@ public class Food extends Cell
 		yFood = y;	
 	}
 }
+//test

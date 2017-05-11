@@ -45,7 +45,7 @@ public class Cell{
 		
 		//Should I "re-call" the constructor and pass the new yPos/xPos variables as a arguments and make it re-render/re-fill? Or do some alternative solution?
 		
-		//Test
+		//Test2
 		
 		return cell;
 	}
@@ -123,3 +123,4 @@ public class Cell{
 	
 	
 }
+//test
