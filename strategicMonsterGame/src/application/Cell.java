@@ -115,10 +115,12 @@ public class Cell{
 	
 	void heroMoveUp()
 	{
-		int destY = (Hero.getyPos() + 1);
+		int destY = (Hero.getyPos() - 1);
 
 		Hero.setypos(destY);
 		//printGrid
+		
+		
 	}
 	
 	
