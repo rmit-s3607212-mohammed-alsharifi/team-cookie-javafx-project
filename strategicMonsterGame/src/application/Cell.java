@@ -49,12 +49,7 @@ public class Cell{
 		
 		return cell;
 	}
-	
-	
-	
-	
-	
-	
+
 	public Cell[][] initGrid(){
 		//Instantiate a new 2d array for the world to share.
 		/*
@@ -116,13 +111,27 @@ public class Cell{
 	void heroMoveUp()
 	{
 		int destY = (Hero.getyPos() - 1);
-
 		Hero.setypos(destY);
 		//printGrid
-		
-		
 	}
 	
+	void heroMoveDown()
+	{
+		int destY = (Hero.getyPos() + 1);
+		Hero.setypos(destY);
+		//printGrid
+	} 
 	
+	void heroMoveLeft()
+	{
+		int destX = (Hero.getxPos() - 1);
+		Hero.setxpos(destX);
+	}
+	
+	void heroMoveRight()
+	{
+		int destX = (Hero.getxPos() + 1);
+		Hero.setxpos(destX);
+	}
 }
 //test

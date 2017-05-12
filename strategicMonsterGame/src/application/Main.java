@@ -42,11 +42,7 @@ import java.util.Scanner;
 	}*/
 	public static void main(String[] args) 
 	{
-		
-		
 	int choice;
-
-        
 		do
 		{
 			System.out.println("------------------------------");
@@ -74,7 +70,7 @@ import java.util.Scanner;
                      	}
                      break;
             case 3:  adminLogin();
-            		 break;         
+            		 break;
             case 4:  //System.out.println("Game Started :)");
             		runGame();
                      break;
@@ -268,19 +264,31 @@ private static boolean userLogin()
 		
 		int dirChoice;
 		
-		System.out.println("Press one to go up!");
+		System.out.println("Press one 1 for up, 2 for left, 3 for right, 4 for down! 5 to exit game!");
 		dirChoice = Integer.parseInt(reader.nextLine());
 		
-		switch(dirChoice)
-		{
-			case 1: cell.heroMoveUp();
-			cell.printGrid(cell.fillGrid(cell.initGrid()));
-		}
+		//while(dirChoice != 5){
+			switch(dirChoice)
+			{
+				case 1: cell.heroMoveUp();
+				cell.printGrid(cell.fillGrid(cell.initGrid()));
+					runGame();
+					break;
+				case 2: cell.heroMoveLeft();
+				cell.printGrid(cell.fillGrid(cell.initGrid()));
+					runGame();
+					break;
+				case 3: cell.heroMoveRight();
+				cell.printGrid(cell.fillGrid(cell.initGrid()));
+					runGame();
+					break;
+				case 4: cell.heroMoveDown();
+				cell.printGrid(cell.fillGrid(cell.initGrid()));
+					runGame();
+					break;
+				default : break;
+			}
+		
 	}
-
-	
-	
-	
-	
 }
 	//test
