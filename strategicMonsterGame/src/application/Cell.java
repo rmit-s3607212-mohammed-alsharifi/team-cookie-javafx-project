@@ -7,6 +7,10 @@ import java.util.ArrayList;
 
 public class Cell{
 
+	int destX;
+	int destY;
+	
+	
 	private final int GRID_WIDTH = 10;
 	private final int GRID_HEIGHT = 10;
 	//A sample grid length. The default.
@@ -101,6 +105,11 @@ public class Cell{
 					System.out.print("|");
 					System.out.print("H");
 				}
+				else if (cell[i][j].id.equals("BLOCK"))
+				{
+					System.out.print("|");
+					System.out.print("0");
+				}
 			}
 		
 			System.out.print("|");
@@ -108,30 +117,60 @@ public class Cell{
 		}
 	}
 	
-	void heroMoveUp()
+	
+	Cell[][] cellRef;
+	
+	public void heroMoveUp() //Try passing the cell array as an argument! //Try not using an argument!
 	{
-		int destY = (Hero.getyPos() - 1);
+		destY = (Hero.getyPos() - 1);
+		//checkYdir(cellRef);
+		
+		//Insert checking functionality here rather than making separate functions? Because that doesn't work?
+		
+		if (cellRef[Hero.getxPos()][destY].id.equals("EMPTY"))
+		{
+			System.out.println("Empty cell registered! Movement possible!");
+		}
+		
 		Hero.setypos(destY);
 		//printGrid
 	}
 	
 	void heroMoveDown()
 	{
-		int destY = (Hero.getyPos() + 1);
+		destY = (Hero.getyPos() + 1);
 		Hero.setypos(destY);
 		//printGrid
-	} 
+	}
 	
 	void heroMoveLeft()
 	{
-		int destX = (Hero.getxPos() - 1);
+		destX = (Hero.getxPos() - 1);
 		Hero.setxpos(destX);
 	}
 	
 	void heroMoveRight()
 	{
-		int destX = (Hero.getxPos() + 1);
+		destX = (Hero.getxPos() + 1);
 		Hero.setxpos(destX);
 	}
+	
+	/*
+	void checkYdir(Cell[][] cellRef)
+	{
+		if (cellRef[Hero.getxPos()][destY].id.equals("EMPTY"))
+		{
+			System.out.println("Empty cell registered! Movement possible!");
+		}
+	}
+	*/
+	
+	void checkXdir()
+	{
+		
+	}
+
+
+	
 }
 //test

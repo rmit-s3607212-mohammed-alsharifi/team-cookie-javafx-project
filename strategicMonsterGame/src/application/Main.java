@@ -259,8 +259,8 @@ private static boolean userLogin()
 	
 	public static void runGame()
 	{
-		Cell cell = new Cell();
-		cell.printGrid(cell.fillGrid(cell.initGrid()));
+		Cell cellRunGame = new Cell();
+		cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
 		
 		int dirChoice;
 		
@@ -270,20 +270,21 @@ private static boolean userLogin()
 		//while(dirChoice != 5){
 			switch(dirChoice)
 			{
-				case 1: cell.heroMoveUp();
-				cell.printGrid(cell.fillGrid(cell.initGrid()));
+				case 1://[Hero.getxPos()][cell.destY].id.equals("EMPTY"));
+					cellRunGame.heroMoveUp();
+					cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
 					runGame();
 					break;
-				case 2: cell.heroMoveLeft();
-				cell.printGrid(cell.fillGrid(cell.initGrid()));
+				case 2: cellRunGame.heroMoveLeft();
+				cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
 					runGame();
 					break;
-				case 3: cell.heroMoveRight();
-				cell.printGrid(cell.fillGrid(cell.initGrid()));
+				case 3: cellRunGame.heroMoveRight();
+				cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
 					runGame();
 					break;
-				case 4: cell.heroMoveDown();
-				cell.printGrid(cell.fillGrid(cell.initGrid()));
+				case 4: cellRunGame.heroMoveDown();
+				cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
 					runGame();
 					break;
 				default : break;
