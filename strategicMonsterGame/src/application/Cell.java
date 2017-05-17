@@ -10,6 +10,8 @@ public class Cell{
 	int destX;
 	int destY;
 	
+	Cell[][] globalCell;
+	
 	
 	private final int GRID_WIDTH = 10;
 	private final int GRID_HEIGHT = 10;
@@ -31,6 +33,7 @@ public class Cell{
 	//emptyArray must be for later use.
 	
 	public Cell[][] fillGrid(Cell[][] cell)
+	//public Cell[][] fillGrid(Cell[][] globalCell)
 	//fillGrid function.
 	{
 		for ( int j = 0; j < GRID_HEIGHT; j++)
@@ -50,6 +53,10 @@ public class Cell{
 		//Should I "re-call" the constructor and pass the new yPos/xPos variables as a arguments and make it re-render/re-fill? Or do some alternative solution?
 		
 		//Test2
+		
+		//this.Cell[][] filledGrid = 
+		
+		//reutrn 
 		
 		return cell;
 	}
@@ -71,10 +78,11 @@ public class Cell{
 		};
 	*/
 		Cell[][] cellGrid2 = new Cell[10][10];
-		
+		//Cell[][] cell = new Cell[10][10];
 		
 		
 		return cellGrid2;
+		//return globalCell;
 	}
 	
 	
@@ -118,16 +126,18 @@ public class Cell{
 	}
 	
 	
-	Cell[][] cellRef;
+	//Cell[][] cellRef;
 	
-	public void heroMoveUp() //Try passing the cell array as an argument! //Try not using an argument!
+	public void heroMoveUp(Cell[][] cell) //Try passing the cell array as an argument! //Try not using an argument!
 	{
 		destY = (Hero.getyPos() - 1);
 		//checkYdir(cellRef);
 		
 		//Insert checking functionality here rather than making separate functions? Because that doesn't work?
 		
-		if (cellRef[Hero.getxPos()][destY].id.equals("EMPTY"))
+		//The reactions to the cell contents go here in each movement function. It is clunky and requires us to copy and paste, but it works.
+		//The next step is to make the responses to the cell contents, i.e. if it's a block, no movement happens. If it's a monster, the kill player function happens, etc.
+		if (cell[Hero.getxPos()][destY].id.equals("EMPTY"))
 		{
 			System.out.println("Empty cell registered! Movement possible!");
 		}
@@ -136,22 +146,41 @@ public class Cell{
 		//printGrid
 	}
 	
-	void heroMoveDown()
+	void heroMoveDown(Cell[][] cell)
 	{
 		destY = (Hero.getyPos() + 1);
+		
+		if (cell[Hero.getxPos()][destY].id.equals("EMPTY"))
+		{
+			System.out.println("Empty cell registered! Movement possible!");
+		}
+			
+			
 		Hero.setypos(destY);
 		//printGrid
 	}
 	
-	void heroMoveLeft()
+	void heroMoveLeft(Cell[][] cell)
 	{
 		destX = (Hero.getxPos() - 1);
+		
+		if (cell[destX][Hero.getyPos()].id.equals("EMPTY"))
+		{
+			System.out.println("Empty cell registered! Movement possible!");
+		}
+		
 		Hero.setxpos(destX);
 	}
 	
-	void heroMoveRight()
+	void heroMoveRight(Cell[][] cell)
 	{
 		destX = (Hero.getxPos() + 1);
+		
+		if (cell[destX][Hero.getyPos()].id.equals("EMPTY"))
+		{
+			System.out.println("Empty cell registered! Movement possible!");
+		}
+		
 		Hero.setxpos(destX);
 	}
 	

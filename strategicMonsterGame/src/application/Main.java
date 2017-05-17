@@ -31,7 +31,7 @@ import java.util.Scanner;
 	{
 		int crap;
 
-		Cell cellref = new Cell();
+		//Cell cellref = new Cell();
 		//Hero heroref = new Hero();
 	
 	//
@@ -260,6 +260,11 @@ private static boolean userLogin()
 	public static void runGame()
 	{
 		Cell cellRunGame = new Cell();
+		//cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
+		
+		
+		
+		Cell[][] playArea = cellRunGame.fillGrid(cellRunGame.initGrid());
 		cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
 		
 		int dirChoice;
@@ -267,29 +272,30 @@ private static boolean userLogin()
 		System.out.println("Press one 1 for up, 2 for left, 3 for right, 4 for down! 5 to exit game!");
 		dirChoice = Integer.parseInt(reader.nextLine());
 		
-		//while(dirChoice != 5){
+		while(dirChoice != 5){
 			switch(dirChoice)
 			{
 				case 1://[Hero.getxPos()][cell.destY].id.equals("EMPTY"));
-					cellRunGame.heroMoveUp();
-					cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
+					cellRunGame.heroMoveUp(playArea);
+					//cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
 					runGame();
 					break;
-				case 2: cellRunGame.heroMoveLeft();
-				cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
+				case 2: cellRunGame.heroMoveLeft(playArea);
+				//cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
 					runGame();
 					break;
-				case 3: cellRunGame.heroMoveRight();
-				cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
+				case 3: cellRunGame.heroMoveRight(playArea);
+				//cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
 					runGame();
 					break;
-				case 4: cellRunGame.heroMoveDown();
-				cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
+				case 4: cellRunGame.heroMoveDown(playArea);
+				//cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
 					runGame();
 					break;
+				case 5 : break;
 				default : break;
 			}
-		
+		}
 	}
 }
 	//test
