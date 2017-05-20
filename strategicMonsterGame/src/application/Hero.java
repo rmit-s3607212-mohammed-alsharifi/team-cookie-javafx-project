@@ -12,10 +12,6 @@ public class Hero extends Cell
 		int xPos = Xinput;
 		int yPos = Yinput;
 	}
-	
-	
-	
-	
 		//Encapsulation time!
 		//Be mindful as I go: That strange hero method(?) 
 		//above may just be representative of position.
@@ -31,11 +27,10 @@ public class Hero extends Cell
 		return yPos;
 	}
 	
-	public void setxpos(int newx)
+	public static void setxpos(int newx)
 	{
 		xPos = newx;
 	}
-	
 	
 	public static void setypos(int newy)
 	{

@@ -31,7 +31,7 @@ import java.util.Scanner;
 	{
 		int crap;
 
-		Cell cellref = new Cell();
+		//Cell cellref = new Cell();
 		//Hero heroref = new Hero();
 	
 	//
@@ -42,11 +42,7 @@ import java.util.Scanner;
 	}*/
 	public static void main(String[] args) 
 	{
-		
-		
 	int choice;
-
-        
 		do
 		{
 			System.out.println("------------------------------");
@@ -74,7 +70,7 @@ import java.util.Scanner;
                      	}
                      break;
             case 3:  adminLogin();
-            		 break;         
+            		 break;
             case 4:  //System.out.println("Game Started :)");
             		runGame();
                      break;
@@ -263,6 +259,7 @@ private static boolean userLogin()
 	
 	public static void runGame()
 	{
+<<<<<<< HEAD
 		Cell cell = new Cell();
 		
 		cell.printGrid(cell.fillGrid(cell.initGrid()));
@@ -274,13 +271,46 @@ private static boolean userLogin()
 			System.out.println("");
 			
 			cell.printGrid(cell.fillGrid(cell.initGrid()));
+=======
+		Cell cellRunGame = new Cell();
+		//cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
+		
+		
+		
+		Cell[][] playArea = cellRunGame.fillGrid(cellRunGame.initGrid());
+		cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
+		
+		int dirChoice;
+		
+		System.out.println("Press one 1 for up, 2 for left, 3 for right, 4 for down! 5 to exit game!");
+		dirChoice = Integer.parseInt(reader.nextLine());
+		
+		while(dirChoice != 5){
+			switch(dirChoice)
+			{
+				case 1://[Hero.getxPos()][cell.destY].id.equals("EMPTY"));
+					cellRunGame.heroMoveUp(playArea);
+					//cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
+					runGame();
+					break;
+				case 2: cellRunGame.heroMoveLeft(playArea);
+				//cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
+					runGame();
+					break;
+				case 3: cellRunGame.heroMoveRight(playArea);
+				//cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
+					runGame();
+					break;
+				case 4: cellRunGame.heroMoveDown(playArea);
+				//cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
+					runGame();
+					break;
+				case 5 : break;
+				default : break;
+			}
+>>>>>>> origin/master
 		}
 		
 	}
-
-	
-	
-	
-	
 }
 	//test
