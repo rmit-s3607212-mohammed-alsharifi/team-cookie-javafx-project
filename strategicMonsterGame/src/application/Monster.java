@@ -6,22 +6,26 @@ public class Monster extends Cell
 {
 	private static int xPos = 3;
 	private static int yPos = 3;
+	private static int abc = 1;
+	
 	static Random r = new Random();
+	
+	
 	private static int right = 0;
 	private static int left = 1;
 	private static int up =2;
 	private static int down = 3;
 	private static int dir = -1;
+	
+	
 	private static int newY;
 	private static int newX;
-	private int b;
 	
 	
-	public Monster(int Xinput , int Yinput) 
+	public Monster(int x , int y) 
 	{
 		this.id = "MONSTER";
-		int xPos = Xinput;
-		int yPos = Yinput;
+		
 	}
 	
 	public static int getxPos()
@@ -50,25 +54,31 @@ public class Monster extends Cell
 		dir= r.nextInt(4);
 		if(dir == right)
 		{
-			newX = (Monster.getxPos()+1);
+			newX = (Monster.getxPos()+abc);
 			Monster.setxpos(newX);
 		}
 		if(dir==left)
 		{
-			newX = (Monster.getxPos()-1);
+			newX = (Monster.getxPos()-abc);
 			Monster.setxpos(newX);
 		}
 		if(dir==up)
 		{
-			newY = (Monster.getyPos()-1);
+			newY = (Monster.getyPos()-abc);
 			Monster.setypos(newY);
 		}
-		if(dir==down)    
+		if(dir==down)
 		{
-			newY = (Monster.getyPos()+1);
+			newY = (Monster.getyPos()+abc);
 			Monster.setypos(newY);
 		}
 		
+		
+		
+		if(xPos<=1 ) xPos = 1;
+		if(yPos>=9) yPos =9 ;
+		if(yPos<=1) yPos=1;
+		if(xPos>=9) xPos =9;
 		
 		
 		
