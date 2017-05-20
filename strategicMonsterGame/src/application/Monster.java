@@ -14,22 +14,15 @@ public class Monster extends Cell
 	private static int dir = -1;
 	private static int newY;
 	private static int newX;
+	private int b;
 	
 	
-	public Monster(int Xinput , int Yinput) //Hero is the return type here. This is a constructor I'm pretty sure.
+	public Monster(int Xinput , int Yinput) 
 	{
 		this.id = "MONSTER";
 		int xPos = Xinput;
 		int yPos = Yinput;
 	}
-	
-	
-	
-	
-		//Encapsulation time!
-		//Be mindful as I go: That strange hero method(?) 
-		//above may just be representative of position.
-	
 	
 	public static int getxPos()
 	{
@@ -70,7 +63,7 @@ public class Monster extends Cell
 			newY = (Monster.getyPos()-1);
 			Monster.setypos(newY);
 		}
-		if(dir==down)
+		if(dir==down)    
 		{
 			newY = (Monster.getyPos()+1);
 			Monster.setypos(newY);

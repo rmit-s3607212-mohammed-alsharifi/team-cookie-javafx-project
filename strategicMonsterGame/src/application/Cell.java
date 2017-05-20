@@ -2,10 +2,12 @@ package application;
 //That's probably necessary for JavaFX
 
 import java.util.ArrayList;
+import java.util.Random;
 //I recall that arraylists are a kind of resizeable array.
 
 
 public class Cell{
+	
 
 	private final int GRID_WIDTH = 10;
 	private final int GRID_HEIGHT = 10;
@@ -23,6 +25,14 @@ public class Cell{
 	//Monster must be defined here.
 	
 	
+	
+	
+	
+	
+
+	
+	
+	
 	ArrayList<Empty> emptyArray = new ArrayList<Empty>();
 	//emptyArray must be for later use.
 	
@@ -38,8 +48,8 @@ public class Cell{
 				//System.out.println("Empty cell created at i ="  + i + "j: " +j);	
 			}
 		}
-		cell[5][5] = new Monster(5 ,5);
-		//New monster is created at 5,5. This is an example of many possible functions.
+		cell[Monster.getxPos()][Monster.getyPos()] = new Monster(Monster.getxPos() ,Monster.getyPos());
+		
 		
 		cell[Hero.getxPos()][Hero.getyPos()] = new Hero(Hero.getxPos() ,Hero.getyPos()); //It was 6,6 orginally
 		
@@ -122,6 +132,11 @@ public class Cell{
 		
 		
 	}
+	
+	
+	
+	
+	
 	
 	
 }

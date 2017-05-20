@@ -264,18 +264,18 @@ private static boolean userLogin()
 	public static void runGame()
 	{
 		Cell cell = new Cell();
+		
 		cell.printGrid(cell.fillGrid(cell.initGrid()));
 		
-		int dirChoice;
-		
-		System.out.println("Press one to go up!");
-		dirChoice = Integer.parseInt(reader.nextLine());
-		
-		switch(dirChoice)
+		for(int i =0;i<10;i++)
 		{
-			case 1: cell.heroMoveUp();
+		
+			Monster.MonsterMove();
+			System.out.println("");
+			
 			cell.printGrid(cell.fillGrid(cell.initGrid()));
 		}
+		
 	}
 
 	
