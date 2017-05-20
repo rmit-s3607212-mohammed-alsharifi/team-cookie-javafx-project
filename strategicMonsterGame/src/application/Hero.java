@@ -2,21 +2,18 @@ package application;
 
 public class Hero extends Cell 
 {
-	private static int xPos = 6;
-	private static int yPos = 6;
+	private static int xPos;
+	private static int yPos;
 	
 	
-	public Hero(int Xinput , int Yinput) //Hero is the return type here. This is a constructor I'm pretty sure.
+	public Hero(int Xinput , int Yinput)
 	{
 		this.id = "HERO";
 		int xPos = Xinput;
 		int yPos = Yinput;
 	}
-		//Encapsulation time!
-		//Be mindful as I go: That strange hero method(?) 
-		//above may just be representative of position.
 	
-	
+	//Encapsulation methods that ensure compatibility and workability.
 	public static int getxPos()
 	{
 		return xPos;
@@ -37,19 +34,4 @@ public class Hero extends Cell
 		yPos = newy;
 	}
 	
-	
-	/*
-	void moveUp()
-	{
-		
-		int destY = yPos++;
-		xPos = xPos;
-		
-		yPos = destY;
-		
-		
-		
-	}
-	*/
-	//test
 }

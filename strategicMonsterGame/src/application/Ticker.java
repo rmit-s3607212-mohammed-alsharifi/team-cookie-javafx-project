@@ -1,7 +1,9 @@
 
 
+
 package application;
 
+/*
 //This class functions in a similar principle to a chess timer that changes turns every 500
 //milliseconds. When the timer ticks over, a command, such as a movement, is "queued"  to this method
 //after the command is sent, and its corresponding function is then exected when 
@@ -15,28 +17,37 @@ public class Ticker
 	public static boolean getTicking()
 	{
 		return ticking;
-	} 
+	}
 	
-	public static void setTicking(boolean newState)
+	public static void setTickingTrue()
 	{
-		ticking = newState;
+		ticking = true;
 	}
 	
 	long startTime = System.nanoTime();
-	long elapsedTime = 0;
-	long turnCounter;
+	private long elapsedTime = 0;
+	private long turnCounter;
 	private int tickCount = 0;
 	
 	public int getTickCount()
 	{
 		return tickCount;
 	}
-	/*
+	
+	
+	public long getElapsedTime()
+	{
+		return elapsedTime;
+	}
+	
+	
+	
+	
 	public void setTickCount()
 	{
 		
 	}
-	*/
+	
 	
 	void addTime(){
 		while (ticking == true)
@@ -52,8 +63,10 @@ public class Ticker
 			resetTurnCounter();
 		}
 	}
-
 	
+	
+
+
 	public void countUp()
 	{
 		elapsedTime = System.nanoTime();
@@ -72,6 +85,9 @@ public class Ticker
 	
 }
 	
+
+
+//Ununsed
 /*
 	long startTime = System.nanoTime();
 	long elapsedTime = 0;
@@ -99,10 +115,10 @@ public class Ticker
 }
 	
 }
-
 */
-/*	
+
 	
+	/*
 	
 //The hero movement booleans.
 	private static boolean heroMoveLeft;
@@ -191,4 +207,5 @@ public class Ticker
 }
 
 }
+
 */

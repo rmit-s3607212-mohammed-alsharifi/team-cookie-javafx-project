@@ -30,6 +30,9 @@ import java.util.Scanner;
 	public class Main
 	{
 		int crap;
+		//static long startTime;
+		static int timeCount = 0;
+		
 
 		//Cell cellref = new Cell();
 		//Hero heroref = new Hero();
@@ -42,6 +45,10 @@ import java.util.Scanner;
 	}*/
 	public static void main(String[] args) 
 	{
+		
+		
+
+		
 	int choice;
 		do
 		{
@@ -259,37 +266,48 @@ private static boolean userLogin()
 	
 	public static void runGame()
 	{
+		//A reference to the cell class.
 		Cell cellRunGame = new Cell();
-		//cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
 		
-		
+		//Used for operating the menu.
+		int dirChoice;
+
 		
 		Cell[][] playArea = cellRunGame.fillGrid(cellRunGame.initGrid());
 		cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
-		
-		int dirChoice;
-		
+
 		System.out.println("Press one 1 for up, 2 for left, 3 for right, 4 for down! 5 to exit game!");
+		
+		//Temporary method of obtaining the direction choice.
 		dirChoice = Integer.parseInt(reader.nextLine());
+		
 		
 		while(dirChoice != 5){
 			switch(dirChoice)
 			{
 				case 1://[Hero.getxPos()][cell.destY].id.equals("EMPTY"));
+					
+					//Runs the "heroMoveUp method within the cell class.
 					cellRunGame.heroMoveUp(playArea);
-					//cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
+					
+					//timeAdvance is a function that increments the time count by 1, and will later run other methods such as food degredation and monster movement.
+					timeAdvance();
+					
+					//Runs the runGame function again (Which we are in at the moment)
 					runGame();
+					
 					break;
+					
 				case 2: cellRunGame.heroMoveLeft(playArea);
-				//cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
+					timeAdvance();
 					runGame();
 					break;
 				case 3: cellRunGame.heroMoveRight(playArea);
-				//cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
+					timeAdvance();
 					runGame();
 					break;
 				case 4: cellRunGame.heroMoveDown(playArea);
-				//cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
+					timeAdvance();
 					runGame();
 					break;
 				case 5 : break;
@@ -297,5 +315,18 @@ private static boolean userLogin()
 			}
 		}
 	}
+	
+	
+	//This function can hold all of the functions that we need to run as time progreses.
+	public static void timeAdvance()
+	{
+		//The time/turn counter goes up.
+		timeCount++;
+		//Turn count for debugging purposes.
+		System.out.println("The turn number is:" + timeCount);
+		//The food degrades by one, using Food's own method to do this.
+		Food.foodMinus();
+		//Printing the remaining time on one hard-coded food item, for debugging purposes.
+		System.out.println("The remaining food time is" + Food.getFoodTime());
+	}
 }
-	//test

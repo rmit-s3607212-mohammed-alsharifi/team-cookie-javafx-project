@@ -7,11 +7,14 @@ import java.util.ArrayList;
 
 public class Cell{
 
+	//A global representation of destX and destY for use in the hero method.
 	int destX;
 	int destY;
 	
+	//A global reference to the cell class for use in later methods.
 	Cell[][] globalCell;
 	
+	boolean foodActiveLocal = Food.getFoodActive();
 	
 	private final int GRID_WIDTH = 10;
 	private final int GRID_HEIGHT = 10;
@@ -50,6 +53,22 @@ public class Cell{
 		
 		cell[Hero.getxPos()][Hero.getyPos()] = new Hero(Hero.getxPos() ,Hero.getyPos()); //It was 6,6 orginally
 		
+		//A simple test for food.
+		cell[2][2] = new Food(2,2);
+		
+		
+		//This was part of a trial where I tried to make food dissapear by making a local variable representation of the "foodActive" variable. Ignore and comment this out if it isn't useful to you.
+		if (cell[2][2].foodActiveLocal == false)
+		{
+			cell[2][2] = new Empty(2,2);
+		}
+		
+		/*
+		if (Food.getFoodActive() == false)
+		{
+			Food.id = "EMPTY";
+		}
+		*/
 		//Should I "re-call" the constructor and pass the new yPos/xPos variables as a arguments and make it re-render/re-fill? Or do some alternative solution?
 		
 		//Test2
@@ -118,6 +137,11 @@ public class Cell{
 					System.out.print("|");
 					System.out.print("0");
 				}
+				else if (cell[i][j].id.equals("FOOD"))
+				{
+					System.out.print("|");
+					System.out.print("F");
+				}
 			}
 		
 			System.out.print("|");
@@ -131,9 +155,7 @@ public class Cell{
 	public void heroMoveUp(Cell[][] cell) //Try passing the cell array as an argument! //Try not using an argument!
 	{
 		destY = (Hero.getyPos() - 1);
-		//checkYdir(cellRef);
 		
-		//Insert checking functionality here rather than making separate functions? Because that doesn't work?
 		
 		//The reactions to the cell contents go here in each movement function. It is clunky and requires us to copy and paste, but it works.
 		//The next step is to make the responses to the cell contents, i.e. if it's a block, no movement happens. If it's a monster, the kill player function happens, etc.
@@ -141,6 +163,7 @@ public class Cell{
 		{
 			System.out.println("Empty cell registered! Movement possible!");
 		}
+		
 		
 		Hero.setypos(destY);
 		//printGrid
@@ -199,7 +222,16 @@ public class Cell{
 		
 	}
 
-
+	/*
+	void destroyFood()
+	{
+		if (Food.getFoodActive == false)
+		{
+			Food.setEmpty();
+		}
+			
+	}
+*/
 	
 }
 //test
