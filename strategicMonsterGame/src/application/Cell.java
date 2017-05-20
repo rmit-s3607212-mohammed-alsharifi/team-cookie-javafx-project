@@ -52,7 +52,60 @@ public class Cell{
 				//Iterate through the two.
 			{
 				cell[i][j] = new Empty( i , j);
-				//System.out.println("Empty cell created at i ="  + i + "j: " +j);	
+				//System.out.println("Empty cell created at i ="  + i + "j: " +j);
+				
+				for(int a =0; a<10; a++)
+				{
+					cell[a][0] = new Block();
+				}
+				
+				for(int a =1; a<9; a++)
+				{
+					cell[a][9] = new Block();
+				}
+				
+				for(int a =1; a<10; a++)
+				{
+					cell[0][a] = new Block();
+				}
+				
+				for(int a =1; a<10; a++)
+				{
+					cell[9][a] = new Block();
+				}
+				
+				for(int a =2; a<5; a++)
+				{
+					cell[2][a] = new Block();
+				}
+				
+				for(int a =2; a<5; a++)
+				{
+					cell[7][a] = new Block();
+				}
+				
+				for(int a =2; a<4; a++)
+				{
+					for(int b =4;b<6;b++)
+					{
+						cell[b][a]=new Block();
+					}
+				}
+				
+				for(int a =4; a<6; a++)
+				{
+					cell[a][5] = new Block();
+				}
+				
+				for(int a =2; a<4; a++)
+				{
+					cell[a][7] = new Block();
+				}
+				
+				for(int a =6; a<8; a++)
+				{
+					cell[a][7] = new Block();
+				}
 			}
 		}
 		cell[Monster.getxPos()][Monster.getyPos()] = new Monster(Monster.getxPos() ,Monster.getyPos());
@@ -60,13 +113,7 @@ public class Cell{
 		
 		cell[Hero.getxPos()][Hero.getyPos()] = new Hero(Hero.getxPos() ,Hero.getyPos()); //It was 6,6 orginally
 		
-		//Should I "re-call" the constructor and pass the new yPos/xPos variables as a arguments and make it re-render/re-fill? Or do some alternative solution?
 		
-		//Test2
-		
-		//this.Cell[][] filledGrid = 
-		
-		//reutrn 
 		
 		return cell;
 	}
