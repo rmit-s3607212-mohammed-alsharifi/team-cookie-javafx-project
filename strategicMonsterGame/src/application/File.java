@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class File {
 
-	String csvFile = "C:/Users/Mohammed/Desktop/strategicMonsterGame/src/application/storedAccounts.csv";
+	String csvFile = "src/application/storedAccounts.csv";
 	BufferedReader buffer = null;
 	String line = "";
 	String cvsDilem = ",";
