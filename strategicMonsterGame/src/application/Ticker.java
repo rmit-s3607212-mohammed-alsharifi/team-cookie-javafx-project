@@ -87,7 +87,7 @@ public class Ticker
 	
 	while (ticking == true)
 	{
-		turnCounter += elapsedTime;
+		turnCounter += elapsedTime;//
 	}
 	
 	
