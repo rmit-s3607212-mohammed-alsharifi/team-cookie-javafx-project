@@ -1,23 +1,107 @@
+
+
 package application;
 
 //This class functions in a similar principle to a chess timer that changes turns every 500
-//milliseconds. When the timer ticks over, a command, such as a movement, is "queded"  to this method
+//milliseconds. When the timer ticks over, a command, such as a movement, is "queued"  to this method
 //after the command is sent, and its corresponding function is then exected when 
 public class Ticker
 {
+	
+
+
 	//This boolean determines whether or not the ticker counts up. (i.e. only during gameplay.
 	private static boolean ticking = false;
 	public static boolean getTicking()
 	{
 		return ticking;
 	} 
+	
 	public static void setTicking(boolean newState)
 	{
 		ticking = newState;
 	}
 	
 	long startTime = System.nanoTime();
-	long elapsedTime = System.nanoTime();
+	long elapsedTime = 0;
+	long turnCounter;
+	private int tickCount = 0;
+	
+	public int getTickCount()
+	{
+		return tickCount;
+	}
+	/*
+	public void setTickCount()
+	{
+		
+	}
+	*/
+	
+	void addTime(){
+		while (ticking == true)
+		{
+			turnCounter += elapsedTime;
+		}
+		
+		if(turnCounter >= 500000000)
+		{
+			int tickCount = 0;
+			System.out.println(tickCount + " tick");
+			tickCount++;
+			resetTurnCounter();
+		}
+	}
+
+	
+	public void countUp()
+	{
+		elapsedTime = System.nanoTime();
+		//Nano time will begin ticking up as soon as this function is executed.
+		resetTurnCounter();
+	}
+	
+	
+	public void resetTurnCounter()
+	{
+		turnCounter = 0;
+	}
+	
+	
+	
+	
+}
+	
+/*
+	long startTime = System.nanoTime();
+	long elapsedTime = 0;
+	long turnCounter;
+
+	public void countUp()
+	{
+		elapsedTime = System.nanoTime();
+		//Nano time will begin ticking up as soon as this function is executed.
+		public void resetTurnCounter();
+	}
+	
+	
+	while (ticking == true)
+	{
+		turnCounter += elapsedTime;
+	}
+	
+	
+	public void resetTurnCounter()
+	{
+		turnCounter = 0;
+	}
+	
+}
+	
+}
+
+*/
+/*	
 	
 	
 //The hero movement booleans.
@@ -102,4 +186,9 @@ public class Ticker
 	}
 	
 }
+}
 
+}
+
+}
+*/
