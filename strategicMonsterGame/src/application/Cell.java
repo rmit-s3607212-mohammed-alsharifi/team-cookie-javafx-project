@@ -47,6 +47,60 @@ public class Cell{
 				cell[i][j] = new Empty( i , j);
 				//System.out.println("Empty cell created at i ="  + i + "j: " +j);	
 			}
+			
+			for(int a =0; a<10; a++)
+			{
+				cell[a][0] = new Block();
+			}
+			
+			for(int a =1; a<9; a++)
+			{
+				cell[a][9] = new Block();
+			}
+			
+			for(int a =1; a<10; a++)
+			{
+				cell[0][a] = new Block();
+			}
+			
+			for(int a =1; a<10; a++)
+			{
+				cell[9][a] = new Block();
+			}
+			
+			for(int a =2; a<5; a++)
+			{
+				cell[2][a] = new Block();
+			}
+			
+			for(int a =2; a<5; a++)
+			{
+				cell[7][a] = new Block();
+			}
+			
+			for(int a =2; a<4; a++)
+			{
+				for(int b =4;b<6;b++)
+				{
+					cell[b][a]=new Block();
+				}
+			}
+			
+			for(int a =4; a<6; a++)
+			{
+				cell[a][5] = new Block();
+			}
+			
+			for(int a =2; a<4; a++)
+			{
+				cell[a][7] = new Block();
+			}
+			
+			for(int a =6; a<8; a++)
+			{
+				cell[a][7] = new Block();
+}
+			
 		}
 		cell[5][5] = new Monster(5 ,5);
 		//New monster is created at 5,5. This is an example of many possible functions.
@@ -163,6 +217,12 @@ public class Cell{
 		{
 			System.out.println("Empty cell registered! Movement possible!");
 		}
+		if (cell[Hero.getxPos()][destY].id.equals("BLOCK"))
+		{
+			System.out.println("Block registered! No move for you!");
+			Hero.setypos(Hero.getyPos());
+		}
+		
 		
 		
 		Hero.setypos(destY);
@@ -216,12 +276,12 @@ public class Cell{
 		}
 	}
 	*/
-	
+	/*
 	void checkXdir()
 	{
 		
 	}
-
+	*/
 	/*
 	void destroyFood()
 	{

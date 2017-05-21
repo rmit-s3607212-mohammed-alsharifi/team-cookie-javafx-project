@@ -1,6 +1,22 @@
 package application;
 
-public class Block extends Cell{
+
+	
+	public class Block extends Cell 
+	{
+		
+		public Block() 
+		{
+			this.id = "BLOCK";
+			
+		}
+
+	}
+		
+		
+/*		
+	public class Block extends Cell{
+	
 	
 	public Block (int x , int y)
 	{
@@ -9,7 +25,8 @@ public class Block extends Cell{
 		xPosition = x;
 		yPosition = y;	
 	}
+	*/
 	//test
 
-}
+
 /////

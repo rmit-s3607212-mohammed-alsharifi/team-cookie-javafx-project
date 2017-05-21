@@ -2,8 +2,8 @@ package application;
 
 public class Hero extends Cell 
 {
-	private static int xPos;
-	private static int yPos;
+	private static int xPos = 1;
+	private static int yPos = 1;
 	
 	public Hero(int Xinput , int Yinput)
 	{
