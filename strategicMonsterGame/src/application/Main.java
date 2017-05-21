@@ -329,4 +329,4 @@ private static boolean userLogin()
 		//Printing the remaining time on one hard-coded food item, for debugging purposes.
 		System.out.println("The remaining food time is" + Food.getFoodTime());
 	}
-}//
+}////

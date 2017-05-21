@@ -1,6 +1,7 @@
 package application;
 
-public class Player {
+public class Player 
+{
 	
 }
-//test//
+//test////

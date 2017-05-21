@@ -5,7 +5,6 @@ public class Hero extends Cell
 	private static int xPos;
 	private static int yPos;
 	
-	
 	public Hero(int Xinput , int Yinput)
 	{
 		this.id = "HERO";
@@ -35,4 +34,4 @@ public class Hero extends Cell
 	}
 	
 }
-//
+////
