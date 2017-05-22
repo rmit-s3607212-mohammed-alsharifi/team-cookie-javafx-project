@@ -99,7 +99,15 @@ public class Cell{
 			for(int a =6; a<8; a++)
 			{
 				cell[a][7] = new Block();
-}
+			}
+			
+			
+			if (Main.getTimeCount() == 0)
+			{
+				Food.setFoodSpawnX();
+				Food.setFoodSpawnY();
+			}
+			
 			
 		}
 		cell[5][5] = new Monster(5 ,5);
@@ -108,7 +116,8 @@ public class Cell{
 		cell[Hero.getxPos()][Hero.getyPos()] = new Hero(Hero.getxPos() ,Hero.getyPos()); //It was 6,6 orginally
 		
 		//A simple test for food.
-		cell[2][2] = new Food(2,2);
+		//cell[Hero.xPos+1][Hero.yPos] = new Food(Hero.xPos+1,Hero.yPos);
+		cell[Food.getFoodSpawnX()][Food.getFoodSpawnY()] = new Food(Food.getFoodSpawnX(),Food.getFoodSpawnY());
 		
 		
 		//This was part of a trial where I tried to make food dissapear by making a local variable representation of the "foodActive" variable. Ignore and comment this out if it isn't useful to you.
@@ -216,16 +225,22 @@ public class Cell{
 		if (cell[Hero.getxPos()][destY].id.equals("EMPTY"))
 		{
 			System.out.println("Empty cell registered! Movement possible!");
+			Hero.setyPos(destY);
 		}
 		if (cell[Hero.getxPos()][destY].id.equals("BLOCK"))
 		{
 			System.out.println("Block registered! No move for you!");
-			Hero.setypos(Hero.getyPos());
+			Hero.setyPos(Hero.getyPos());
+		}
+		if (cell[Hero.getxPos()][destY].id.equals("FOOD"))
+		{
+			System.out.println("Poisoned");
+			Hero.setyPos(Hero.getyPos());
 		}
 		
 		
 		
-		Hero.setypos(destY);
+		
 		//printGrid
 	}
 	
@@ -236,11 +251,19 @@ public class Cell{
 		if (cell[Hero.getxPos()][destY].id.equals("EMPTY"))
 		{
 			System.out.println("Empty cell registered! Movement possible!");
+			Hero.setyPos(destY);
 		}
-			
-			
-		Hero.setypos(destY);
+		if (cell[Hero.getxPos()][destY].id.equals("BLOCK"))
+		{
+			System.out.println("Block registered! No move for you!");
+			Hero.setyPos(Hero.getyPos());
+		}
 		//printGrid
+		if (cell[Hero.getxPos()][destY].id.equals("FOOD"))
+		{
+			System.out.println("Poisoned");
+			Hero.setyPos(Hero.getyPos());
+		}
 	}
 	
 	void heroMoveLeft(Cell[][] cell)
@@ -250,9 +273,19 @@ public class Cell{
 		if (cell[destX][Hero.getyPos()].id.equals("EMPTY"))
 		{
 			System.out.println("Empty cell registered! Movement possible!");
+			Hero.setxPos(destX);
+		}
+		if (cell[destX][Hero.getyPos()].id.equals("BLOCK"))
+		{
+			System.out.println("Block registered! No move for you!");
+			Hero.setxPos(Hero.getxPos());
+		}
+		if (cell[destX][Hero.getyPos()].id.equals("FOOD"))
+		{
+			System.out.println("Poisoned");
+			Hero.setxPos(Hero.getxPos());
 		}
 		
-		Hero.setxpos(destX);
 	}
 	
 	void heroMoveRight(Cell[][] cell)
@@ -262,9 +295,26 @@ public class Cell{
 		if (cell[destX][Hero.getyPos()].id.equals("EMPTY"))
 		{
 			System.out.println("Empty cell registered! Movement possible!");
+			Hero.setxPos(destX);
+		}
+		if (cell[destX][Hero.getyPos()].id.equals("BLOCK"))
+		{
+			System.out.println("Block registered! No move for you!");
+			Hero.setxPos(Hero.getxPos());
+		}
+		if (cell[destX][Hero.getyPos()].id.equals("FOOD"))
+		{
+			System.out.println("Poisoned");
+			Hero.setxPos(Hero.getxPos());
 		}
 		
-		Hero.setxpos(destX);
+		
+	}
+	
+	void heroStill(Cell[][] cell)
+	{
+		Hero.setyPos(Hero.getyPos());
+		Hero.setxPos(Hero.getxPos());
 	}
 	
 	/*

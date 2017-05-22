@@ -33,6 +33,12 @@ import java.util.Scanner;
 		//static long startTime;
 		static int timeCount = 0;
 		
+		
+		public static int getTimeCount()
+		{
+			return timeCount;
+		}
+		
 
 		//Cell cellref = new Cell();
 		//Hero heroref = new Hero();
@@ -276,20 +282,20 @@ private static boolean userLogin()
 		Cell[][] playArea = cellRunGame.fillGrid(cellRunGame.initGrid());
 		cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
 
-		System.out.println("Press one 1 for up, 2 for left, 3 for right, 4 for down! 5 to exit game!");
+		System.out.println("Press one 1 for up, 2 for left, 3 for right, 4 for down! 5 to stay stationary!, 6 to exit!");
 		
 		//Temporary method of obtaining the direction choice.
 		dirChoice = Integer.parseInt(reader.nextLine());
 		
+		while(dirChoice != 6){
 		
-		while(dirChoice != 5){
 			switch(dirChoice)
 			{
 				case 1://[Hero.getxPos()][cell.destY].id.equals("EMPTY"));
 					
 					//Runs the "heroMoveUp method within the cell class.
 					cellRunGame.heroMoveUp(playArea);
-					
+				
 					//timeAdvance is a function that increments the time count by 1, and will later run other methods such as food degredation and monster movement.
 					timeAdvance();
 					
@@ -310,11 +316,20 @@ private static boolean userLogin()
 					timeAdvance();
 					runGame();
 					break;
-				case 5 : break;
+				case 5 : 
+					cellRunGame.heroStill(playArea);
+					runGame();
+					timeAdvance();
+					break;
+					
+					
+					
+				case 6 : break;
 				default : break;
 			}
 		}
 	}
+	
 	
 	
 	//This function can hold all of the functions that we need to run as time progreses.

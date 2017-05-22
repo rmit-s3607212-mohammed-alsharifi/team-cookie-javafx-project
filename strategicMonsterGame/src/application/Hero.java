@@ -2,8 +2,9 @@ package application;
 
 public class Hero extends Cell 
 {
-	private static int xPos = 1;
-	private static int yPos = 1;
+	public static int xPos = 1; //private
+	public static int yPos = 1;  //private
+	private static boolean heroSlowed = false; 
 	
 	public Hero(int Xinput , int Yinput)
 	{
@@ -23,15 +24,27 @@ public class Hero extends Cell
 		return yPos;
 	}
 	
-	public static void setxpos(int newx)
+	public static void setxPos(int newx)
 	{
 		xPos = newx;
 	}
 	
-	public static void setypos(int newy)
+	public static void setyPos(int newy)
 	{
 		yPos = newy;
 	}
+	
+	public boolean getHeroSlowed()
+	{
+		return heroSlowed;
+	}
+	
+	public void setHeroSlowed(boolean newValue)
+	{
+		heroSlowed = newValue;
+	}
+	
+	
 	
 }
 /////

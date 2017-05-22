@@ -4,16 +4,18 @@ public class Food extends Cell
 {
 	private static int xFood;
 	private static int yFood;
-	private static int timeFood = 3;
+	private static int timeFood = 20;
 	static boolean foodActive = true;
-	
+	private static int foodDestX;
+	private static int foodDestY;
 	
 	public Food (int x, int y)
 	{	
 		this.id = "FOOD";
 		xFood = x;
 		yFood = y;	
-		//timeFood = time;
+		int foodDestX;
+		int foodDestY;
 	}
 	
 	
@@ -60,8 +62,27 @@ public class Food extends Cell
 	}
 
 
-
-
+	public static void setFoodSpawnX()
+	{
+		foodDestX = Hero.xPos;
+		//return foodDestX;
+	}
+	
+	public static void setFoodSpawnY()
+	{
+		foodDestY = Hero.yPos;
+		//return foodDestY;
+	}
+	
+	public static int getFoodSpawnX()
+	{
+		return foodDestX;
+	}
+	
+	public static int getFoodSpawnY()
+	{
+		return foodDestY;
+	}
 	
 	/*
 	public void setEmpty()
