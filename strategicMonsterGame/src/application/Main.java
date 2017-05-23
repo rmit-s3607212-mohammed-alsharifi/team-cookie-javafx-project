@@ -295,6 +295,8 @@ private static boolean userLogin()
 					
 					//Runs the "heroMoveUp method within the cell class.
 					cellRunGame.heroMoveUp(playArea);
+					Monster.MonsterMove();
+					Monster2.MonsterMove();
 				
 					//timeAdvance is a function that increments the time count by 1, and will later run other methods such as food degredation and monster movement.
 					timeAdvance();
@@ -305,19 +307,27 @@ private static boolean userLogin()
 					break;
 					
 				case 2: cellRunGame.heroMoveLeft(playArea);
+					Monster.MonsterMove();
+					Monster2.MonsterMove();
 					timeAdvance();
 					runGame();
 					break;
 				case 3: cellRunGame.heroMoveRight(playArea);
+					Monster.MonsterMove();
+					Monster2.MonsterMove();
 					timeAdvance();
 					runGame();
 					break;
 				case 4: cellRunGame.heroMoveDown(playArea);
+					Monster.MonsterMove();
+					Monster2.MonsterMove();
 					timeAdvance();
 					runGame();
 					break;
 				case 5 : 
 					cellRunGame.heroStill(playArea);
+					Monster.MonsterMove();
+					Monster2.MonsterMove();
 					runGame();
 					timeAdvance();
 					break;
