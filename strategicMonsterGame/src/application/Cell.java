@@ -110,9 +110,9 @@ public class Cell{
 			
 			
 		}
-		cell[5][5] = new Monster(5 ,5);
-		//New monster is created at 5,5. This is an example of many possible functions.
 		
+		cell[Monster.getxPos()][Monster.getyPos()] = new Monster(Monster.getxPos() ,Monster.getyPos());
+		cell[Monster2.getxxPos()][Monster2.getyyPos()] = new Monster2(Monster2.getxxPos() ,Monster2.getyyPos());
 		cell[Hero.getxPos()][Hero.getyPos()] = new Hero(Hero.getxPos() ,Hero.getyPos()); //It was 6,6 orginally
 		
 		//A simple test for food.
@@ -190,6 +190,13 @@ public class Cell{
 					System.out.print("|");
 					System.out.print("*");
 				}
+				
+				else if (cell[i][j].id.equals("MONSTER2")) // Just like my code.
+				{
+					System.out.print("|");
+					System.out.print("*");
+				}
+				
 				else if (cell[i][j].id.equals("HERO"))
 				{
 					System.out.print("|");
