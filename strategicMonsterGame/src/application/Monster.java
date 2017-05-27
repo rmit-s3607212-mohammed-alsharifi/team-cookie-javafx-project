@@ -1,6 +1,6 @@
 package application;
 
-public class Monster extends Cell       //Vinh: This class has all function of setting position for Monsters
+public class Monster extends Cell       //Vinh: This class has all functions of setting position for Monsters
 {
 	private static int xPos=3; 			 //Vinh: start point of monster is 3-3;
 	private static int yPos=3;
