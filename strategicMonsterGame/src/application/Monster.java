@@ -1,17 +1,20 @@
 package application;
 
-public class Monster extends Cell 
+public class Monster extends Cell       //Vinh: This class has all function of setting position for Monsters
 {
-	private static int xPos=3;  // start point of monster is 3-3;
+	private static int xPos=3; 			 //Vinh: start point of monster is 3-3;
 	private static int yPos=3;
 	
-	private static int xxPos=3;  // start point of monster is 3-3;
+	private static int xxPos=3;  			//Vinh: start point of monster is 3-5;
 	private static int yyPos=5;
+	
+	public static int monsterPoisonTime;         //Poisontime of M1
+	public static int monsterPoisonTime2;		//Poisontime of M2
 	
 	public static boolean MonsterSlowed;
 	
 	
-	public Monster(int Xinput , int Yinput) //tried something like Monster monster 1 = new Monster but failed
+	public Monster(int Xinput , int Yinput) //Vinh: I tried something like Monster monster 1 = new Monster() but failed
 	{
 		this.id = "MONSTER";
 		
@@ -66,20 +69,5 @@ public class Monster extends Cell
 	}
 	
 	
-	public static boolean contactFood()			
-	{
-		return false;
-	}
-	
-	public static boolean poison()
-	{
-		return false;
-	}
-	
-	
-	public static boolean doublePoison()
-	{
-		return false;
-	}	
 	
 }
