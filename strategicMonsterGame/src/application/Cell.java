@@ -7,11 +7,11 @@ import java.util.Random;
 
 public class Cell{
 
-	//A global representation of destX and destY for use in the hero method.
+	
 	int destX;
 	int destY;
 
-	Random r = new Random();   // create a random number which be set automatically by system
+	Random r = new Random();   //Josh: create a random number which be set automatically by system
 	
 	int destX2;
 	int destY2;
@@ -24,33 +24,28 @@ public class Cell{
 	int down=3;
 	int dir = -1;
 	
-	//A global reference to the cell class for use in later methods.
+	//Angus: A global reference to the cell class for use in later methods.
 	Cell[][] globalCell;
 
-	//boolean foodActiveLocal = Food.getFoodActive();
-
+	//Redha: These finals set the grid width and height in stone.
 	private final int GRID_WIDTH = 10;
 	private final int GRID_HEIGHT = 10;
-	//A sample grid length. The default.
 
-	//variables for monster
+	//Danny: variables for monster
 	String id;
 	int xPosition;
 	int yPosition;
 	
-
-	//Empty empty;
 	Monster monster;
 	Empty empty;
-	//Monster must be defined here.
 
-
+	
 	ArrayList<Empty> emptyArray = new ArrayList<Empty>();
 	//emptyArray must be for later use.
 
 	public Cell[][] fillGrid(Cell[][] cell)
-	//public Cell[][] fillGrid(Cell[][] globalCell)
-	//fillGrid function.
+	//Redha: This function fills the previously initialized grid with all of the predetermined wall, hero and monster locations.
+	//Angus: This wall configuration was considered to give ample room for experimentation.
 	{
 		for ( int j = 0; j < GRID_HEIGHT; j++)
 		{
@@ -149,33 +144,17 @@ public class Cell{
 		return cell;
 	}
 
+	//Redha: This function creates a 2d array of the type Cell, and returns it for future use.
 	public Cell[][] initGrid(){
-		//Instantiate a new 2d array for the world to share.
-		/*
-	Cell[][] cellGrid = new Cell[][] {
-		{empty, empty , empty, empty , empty, empty , empty, empty , empty, empty},
-		{empty, empty , empty, empty , empty, empty , empty, empty , empty, empty},
-		{empty, empty , empty, empty , empty, empty , empty, empty , empty, empty},
-		{empty, empty , empty, empty , empty, empty , empty, empty , empty, empty},
-		{empty, empty , empty, empty , empty, empty , empty, empty , empty, empty},
-		{empty, empty , empty, empty , empty, empty , empty, empty , empty, empty},
-		{empty, empty , empty, empty , empty, empty , empty, empty , empty, empty},
-		{empty, empty , empty, empty , empty, empty , empty, empty , empty, empty},
-		{empty, empty , empty, empty , empty, empty , empty, empty , empty, empty},
-		{empty, empty , empty, empty , empty, empty , empty, empty , empty, empty},
-		};
-	*/
+		
 		Cell[][] cellGrid2 = new Cell[GRID_WIDTH][GRID_HEIGHT];
-		//Cell[][] cell = new Cell[10][10];
-
 
 		return cellGrid2;
-		//return globalCell;
 	}
 
 
 
-
+	//Redha and Angus: This function iterates through the aforementioned 2d array and renders them with ascii-style graphics. 
 	public void printGrid(Cell[][] cell)
 	{
 		for ( int j = 0; j < GRID_HEIGHT; j++)
@@ -221,17 +200,16 @@ public class Cell{
 			}
 
 			System.out.print("|");
-			System.out.println(""); //Endcaps.
+			System.out.println("");
 		}
 	}
 
-	public void heroMoveUp(Cell[][] cell) //Try passing the cell array as an argument! //Try not using an argument!
+	public void heroMoveUp(Cell[][] cell) //Angus: The other hero movement functions are identical in principle.
 	{
 		destY = (Hero.getyPos() - 1);
+		//Angus: The y-axial destination is returned from the hero class.
 
-
-		//The reactions to the cell contents go here in each movement function. It is clunky and requires us to copy and paste, but it works.
-		//The next step is to make the responses to the cell contents, i.e. if it's a block, no movement happens. If it's a monster, the kill player function happens, etc.
+		//Angus: The contents of the destination cell are checked, and the possible types, and their responses, are iterated with if statements.
 		if (cell[Hero.getxPos()][destY].id.equals("EMPTY"))
 		{
 			System.out.println("Empty cell registered! Movement possible!");
@@ -240,22 +218,17 @@ public class Cell{
 		if (cell[Hero.getxPos()][destY].id.equals("BLOCK"))
 		{
 			System.out.println("Block registered! No move for you!");
-			Hero.setyPos(Hero.getyPos());
+			Hero.setyPos(Hero.getyPos()); //Angus: The position stays the same.
 		}
 		if (cell[Hero.getxPos()][destY].id.equals("FOOD"))
 		{
 			System.out.println("Poisoned");
-			Hero.poisonTime = 21;	//sets duration of player slow
+			Hero.poisonTime = 21;	//Josh: sets duration of player slow
 			Food.xFood = 0;			//despawning of food
 			Food.yFood = 0;			//^
 			Food.timeFood = 0;		//^^
 			Hero.setyPos(destY);
 		}
-
-
-
-
-		//printGrid
 	}
 
 	void heroMoveDown(Cell[][] cell)
@@ -272,7 +245,6 @@ public class Cell{
 			System.out.println("Block registered! No move for you!");
 			Hero.setyPos(Hero.getyPos());
 		}
-		//printGrid
 		if (cell[Hero.getxPos()][destY].id.equals("FOOD"))
 		{
 			System.out.println("Poisoned");
@@ -284,9 +256,10 @@ public class Cell{
 		}
 	}
 
+	
 	void heroMoveLeft(Cell[][] cell)
 	{
-		destX = (Hero.getxPos() - 1);
+		destX = (Hero.getxPos() - 1); //Angus: The x position is returned from Hero, similarly to y-axial movement.
 
 		if (cell[destX][Hero.getyPos()].id.equals("EMPTY"))
 		{
@@ -341,12 +314,12 @@ public class Cell{
 	{
 		Hero.setyPos(Hero.getyPos());
 		Hero.setxPos(Hero.getxPos());
+		//Angus: The hero stays stationary because of the above two lines.
 	}
 
 	
 	
 	//Movement of Monster 1 Start from here
-	
 	public void MonsterMove(Cell[][] cell)
 	{
 		dir=r.nextInt(4);                         	//System will chose randomly from 0 -> 3 
@@ -357,8 +330,6 @@ public class Cell{
 			{
 				System.out.println("Player has been eaten by monster 1");
 				Monster.setxPos(destX2);
-				
-				
 			}
 			else if (cell[destX2][Monster.getyPos()].id.equals("EMPTY"))  // check if next step is Empty
 			{
@@ -375,11 +346,9 @@ public class Cell{
 			{
 				System.out.println("Monster 1 Poisoned");	
 			}
-			
-			
 		}
 		
-		if(dir==left)                                   //If system let monster turn left
+		if(dir==left) //If system let monster turn left
 		{
 			destX2 = (Monster.getxPos() - 1);
 			

@@ -224,25 +224,25 @@ private static boolean userLogin()
 
 	public static void runGame()
 	{
-		//A reference to the cell class.
+		//Angus: A reference to the cell class.
 		Cell cellRunGame = new Cell();
 
-		//Used for operating the menu.
+		//Angus: integer used for operating the menu.
 		int dirChoice;
 
-
+		//Angus: A reference to the initilized grid from Cell is created here.
 		Cell[][] playArea = cellRunGame.fillGrid(cellRunGame.initGrid());
+		
+		//Mohammed: The grid is printed to the console with every movement.
 		cellRunGame.printGrid(cellRunGame.fillGrid(cellRunGame.initGrid()));
 
+		//Angus: These instructions are printed to the user every turn.
 		System.out.println("Press one 1 for up, 2 for left, 3 for right, 4 for down! 5 to stay stationary!, 6 to place food, 7 to exit!");
 
 		//Temporary method of obtaining the direction choice.
 		dirChoice = Integer.parseInt(reader.nextLine());
 
-
-
-		//while(dirChoice != 7){
-			if(Hero.poisonTime > 0)	//if poison has been stood on
+			if(Hero.poisonTime > 0)	//Josh: if poison has been stood on
 			{
 				if(Hero.poisonTime%2 == 1)	//and it is an odd turn
 				{
@@ -257,21 +257,21 @@ private static boolean userLogin()
 					switch(dirChoice) //let hero move or stand still
 					{
 						case 1:
+							//Angus: Each case will trigger a Hero movement command. The other directions are identical in principle.
+							
 							Food.spawner = false;
-
-							//[Hero.getxPos()][cell.destY].id.equals("EMPTY"));
-
+							
 							//Runs the "heroMoveUp method within the cell class.
 							cellRunGame.heroMoveUp(playArea);
 							
+							//Danny: The movement functions of each monster are executed.
 							cellRunGame.MonsterMove(playArea);
 							cellRunGame.MonsterMove2(playArea);
 					
-
-							//timeAdvance is a function that increments the time count by 1, and will later run other methods such as food degredation and monster movement.
+							//Angus: timeAdvance is a function that increments the time count by 1, and will later run other methods such as food degredation and monster movement.
 							timeAdvance();
 
-							//Runs the runGame function again (Which we are in at the moment)
+							//Angus: Runs the runGame function again (which this command is currently inside), continuing the game until the player dies, wins or quits.
 							runGame();
 
 							break;
@@ -320,34 +320,24 @@ private static boolean userLogin()
 
 
 						case 7 :
+							//Quit the game.
 							loadGameMenu();
 						default : break;
 					}
 				}
 			}
-			else if (Hero.poisonTime == 0) //if food hasn't been stood on
+			else if (Hero.poisonTime == 0) //Josh: if food hasn't been stood on
 			{
 				switch(dirChoice)	//advance as usual
 				{
 					case 1:
 						Food.spawner = false;
-
-						//[Hero.getxPos()][cell.destY].id.equals("EMPTY"));
-
-						//Runs the "heroMoveUp method within the cell class.
 						cellRunGame.heroMoveUp(playArea);
-						
 						cellRunGame.MonsterMove(playArea);
 						cellRunGame.MonsterMove2(playArea);
-
-						//timeAdvance is a function that increments the time count by 1, and will later run other methods such as food degredation and monster movement.
 						timeAdvance();
-
-						//Runs the runGame function again (Which we are in at the moment)
 						runGame();
-
 						break;
-
 					case 2:
 						Food.spawner = false;
 						cellRunGame.heroMoveLeft(playArea);
@@ -388,37 +378,39 @@ private static boolean userLogin()
 						timeAdvance();
 						runGame();
 						break;
-
-
-
 					case 7 : 
 						loadGameMenu();
 					default : break;
 				}
 			}
-		//}
-	}
+		
+		}
 
 
-	//This function can hold all of the functions that we need to run as time progreses.
+	//Angus: This function increments 
 	public static void timeAdvance()
 	{
-		//The time/turn counter goes up.
+		//Angus: The time/turn counter goes up.
 		timeCount++;
+		
+		//Josh: The time remaining for the food's appearance reduces.
 		Food.timeFood--;
 
-		//Turn count for debugging purposes.
+		//Turn count is displayed to the player.
 		System.out.println("The turn number is:" + timeCount);
 
+		//Angus: It is printed to the player with each turn.
 		if(Food.timeFood > 0)
 		System.out.println("The remaining food time is" + Food.timeFood);
 
-		if(Hero.poisonTime > 0) //if poison is active
+		//Josh: if poison is active
+		if(Hero.poisonTime > 0)
 		{
 			Hero.poisonTime--;	//count down poison
 			System.out.println("Poison timer is: " + Hero.poisonTime);
 		}
 		
+		//Angus: The player achieves victory when they survive for 100 turns.
 		if (timeCount >= 100)
 		{
 			System.out.println("Winner!");

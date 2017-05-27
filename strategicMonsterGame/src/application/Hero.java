@@ -6,14 +6,15 @@ public class Hero extends Cell
 	public static int yPos = 1; 
 	public static int poisonTime;
 	
+	//Redha: This constructer method is used in Cell for the initial position.
 	public Hero(int Xinput , int Yinput)
 	{
 		this.id = "HERO";
 		int xPos = Xinput;
 		int yPos = Yinput;
 	}
-
-	//Encapsulation methods that ensure compatibility and workability.
+	
+	//Angus: These encapsulation methods ensure compatibility and workability.
 	public static int getxPos()
 	{
 		return xPos;
