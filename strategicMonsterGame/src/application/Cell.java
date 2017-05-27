@@ -1,8 +1,7 @@
 package application;
-//That's probably necessary for JavaFX
+
 
 import java.util.ArrayList;
-//I recall that arraylists are a kind of resizeable array.
 
 import java.util.Random;
 
@@ -121,29 +120,32 @@ public class Cell{
 
 		}
 
-		//New monster is created at 5,5. This is an example of many possible functions
-
 		cell[Monster.getxPos()][Monster.getyPos()] = new Monster(Monster.getxPos() ,Monster.getyPos());
 		cell[Monster2.getxxPos()][Monster2.getyyPos()] = new Monster2(Monster2.getxxPos() ,Monster2.getyyPos());
 		cell[Hero.getxPos()][Hero.getyPos()] = new Hero(Hero.getxPos() ,Hero.getyPos()); //It was 6,6 orginally
 
-		//A simple test for food.
+		
 
 		if (Food.spawner == true)
 		{
 			cell[Hero.xPos][Hero.yPos] = new Food(Hero.xPos,Hero.yPos, 21);
 		}
-
+		//sets the food spawn to hero location and food time to 20 time units after hero moves places it
+		
 		if(Food.timeFood <= 0)
 		{
 			Food.xFood = -1;
 			Food.yFood = -1;
 		}
+		//despawns the food after its time reaches 0
+		
 		else
 		{
 			cell[Food.xFood][Food.yFood] = new Food(Food.xFood,Food.yFood, Food.timeFood);
 		}
-
+		//makes sure the food stays in the same location for each iteration of the grid
+		
+		
 		return cell;
 	}
 
@@ -192,13 +194,13 @@ public class Cell{
 				else if (cell[i][j].id.equals("MONSTER")) // Just like my code.
 				{
 					System.out.print("|");
-					System.out.print("*");
+					System.out.print("&");
 				}
 				
 				else if (cell[i][j].id.equals("MONSTER2")) // Just like my code.
 				{
 					System.out.print("|");
-					System.out.print("*");
+					System.out.print("$");
 				}
 				
 				else if (cell[i][j].id.equals("HERO"))
@@ -243,10 +245,10 @@ public class Cell{
 		if (cell[Hero.getxPos()][destY].id.equals("FOOD"))
 		{
 			System.out.println("Poisoned");
-			Hero.poisonTime = 21;
-			Food.xFood = 0;
-			Food.yFood = 0;
-			Food.timeFood = 0;
+			Hero.poisonTime = 21;	//sets duration of player slow
+			Food.xFood = 0;			//despawning of food
+			Food.yFood = 0;			//^
+			Food.timeFood = 0;		//^^
 			Hero.setyPos(destY);
 		}
 
@@ -275,9 +277,9 @@ public class Cell{
 		{
 			System.out.println("Poisoned");
 			Hero.poisonTime = 21;
-			Food.xFood = 0;
-			Food.yFood = 0;
-			Food.timeFood = 0;
+			Food.xFood = 0; 		
+			Food.yFood = 0;			
+			Food.timeFood = 0;		
 			Hero.setyPos(destY);
 		}
 	}
