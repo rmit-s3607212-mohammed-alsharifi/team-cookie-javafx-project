@@ -4,80 +4,94 @@ package application;
 import java.util.ArrayList;
 //I recall that arraylists are a kind of resizeable array.
 
+import java.util.Random;
 
 public class Cell{
 
 	//A global representation of destX and destY for use in the hero method.
 	int destX;
 	int destY;
+
+	Random r = new Random();   // create a random number which be set automatically by system
+	
+	int destX2;
+	int destY2;
+	int destX3;
+	int destY3;
+	
+	int right = 0;
+	int left = 1;
+	int up =2;
+	int down=3;
+	int dir = -1;
 	
 	//A global reference to the cell class for use in later methods.
 	Cell[][] globalCell;
-	
-	boolean foodActiveLocal = Food.getFoodActive();
-	
+
+	//boolean foodActiveLocal = Food.getFoodActive();
+
 	private final int GRID_WIDTH = 10;
 	private final int GRID_HEIGHT = 10;
 	//A sample grid length. The default.
-	
-	//What Id is for, idk.
-	String id; //This is what id was. A string!
+
+	//variables for monster
+	String id;
 	int xPosition;
 	int yPosition;
-	//Who is using these values? The player? Maybe its intended for all.
 	
+
 	//Empty empty;
 	Monster monster;
 	Empty empty;
 	//Monster must be defined here.
-	
-	
+
+
 	ArrayList<Empty> emptyArray = new ArrayList<Empty>();
 	//emptyArray must be for later use.
-	
+
 	public Cell[][] fillGrid(Cell[][] cell)
 	//public Cell[][] fillGrid(Cell[][] globalCell)
 	//fillGrid function.
 	{
 		for ( int j = 0; j < GRID_HEIGHT; j++)
 		{
-			for (int  i = 0 ; i < 10 ; i++)
+			for (int  i = 0 ; i < GRID_WIDTH ; i++)
 				//Iterate through the two.
 			{
 				cell[i][j] = new Empty( i , j);
-				//System.out.println("Empty cell created at i ="  + i + "j: " +j);	
+				//System.out.println("Empty cell created at i ="  + i + "j: " +j);
 			}
-			
+
 			for(int a =0; a<10; a++)
 			{
 				cell[a][0] = new Block();
 			}
-			
+
 			for(int a =1; a<9; a++)
 			{
 				cell[a][9] = new Block();
 			}
-			
+
 			for(int a =1; a<10; a++)
 			{
 				cell[0][a] = new Block();
 			}
-			
+
 			for(int a =1; a<10; a++)
 			{
 				cell[9][a] = new Block();
 			}
-			
+
 			for(int a =2; a<5; a++)
 			{
 				cell[2][a] = new Block();
 			}
-			
+
 			for(int a =2; a<5; a++)
 			{
 				cell[7][a] = new Block();
 			}
-			
+
 			for(int a =2; a<4; a++)
 			{
 				for(int b =4;b<6;b++)
@@ -85,68 +99,58 @@ public class Cell{
 					cell[b][a]=new Block();
 				}
 			}
-			
+
 			for(int a =4; a<6; a++)
 			{
 				cell[a][5] = new Block();
 			}
-			
+
 			for(int a =2; a<4; a++)
 			{
 				cell[a][7] = new Block();
 			}
-			
+
 			for(int a =6; a<8; a++)
 			{
 				cell[a][7] = new Block();
 			}
-			
-			
-			if (Main.getTimeCount() == 0)
-			{
-				Food.setFoodSpawnX();
-				Food.setFoodSpawnY();
-			}
-			
-			
+
+
+
+
+
 		}
-		
+
+		//New monster is created at 5,5. This is an example of many possible functions
+
 		cell[Monster.getxPos()][Monster.getyPos()] = new Monster(Monster.getxPos() ,Monster.getyPos());
 		cell[Monster2.getxxPos()][Monster2.getyyPos()] = new Monster2(Monster2.getxxPos() ,Monster2.getyyPos());
 		cell[Hero.getxPos()][Hero.getyPos()] = new Hero(Hero.getxPos() ,Hero.getyPos()); //It was 6,6 orginally
-		
+
 		//A simple test for food.
-		//cell[Hero.xPos+1][Hero.yPos] = new Food(Hero.xPos+1,Hero.yPos);
-		cell[Food.getFoodSpawnX()][Food.getFoodSpawnY()] = new Food(Food.getFoodSpawnX(),Food.getFoodSpawnY());
-		
-		
-		//This was part of a trial where I tried to make food dissapear by making a local variable representation of the "foodActive" variable. Ignore and comment this out if it isn't useful to you.
-		if (cell[2][2].foodActiveLocal == false)
+
+		if (Food.spawner == true)
 		{
-			cell[2][2] = new Empty(2,2);
+			cell[Hero.xPos][Hero.yPos] = new Food(Hero.xPos,Hero.yPos, 21);
 		}
-		
-		/*
-		if (Food.getFoodActive() == false)
+
+		if(Food.timeFood <= 0)
 		{
-			Food.id = "EMPTY";
+			Food.xFood = -1;
+			Food.yFood = -1;
 		}
-		*/
-		//Should I "re-call" the constructor and pass the new yPos/xPos variables as a arguments and make it re-render/re-fill? Or do some alternative solution?
-		
-		//Test2
-		
-		//this.Cell[][] filledGrid = 
-		
-		//reutrn 
-		
+		else
+		{
+			cell[Food.xFood][Food.yFood] = new Food(Food.xFood,Food.yFood, Food.timeFood);
+		}
+
 		return cell;
 	}
 
 	public Cell[][] initGrid(){
 		//Instantiate a new 2d array for the world to share.
 		/*
-	Cell[][] cellGrid = new Cell[][] { 
+	Cell[][] cellGrid = new Cell[][] {
 		{empty, empty , empty, empty , empty, empty , empty, empty , empty, empty},
 		{empty, empty , empty, empty , empty, empty , empty, empty , empty, empty},
 		{empty, empty , empty, empty , empty, empty , empty, empty , empty, empty},
@@ -159,27 +163,27 @@ public class Cell{
 		{empty, empty , empty, empty , empty, empty , empty, empty , empty, empty},
 		};
 	*/
-		Cell[][] cellGrid2 = new Cell[10][10];
+		Cell[][] cellGrid2 = new Cell[GRID_WIDTH][GRID_HEIGHT];
 		//Cell[][] cell = new Cell[10][10];
-		
-		
+
+
 		return cellGrid2;
 		//return globalCell;
 	}
-	
-	
-	
-	
+
+
+
+
 	public void printGrid(Cell[][] cell)
 	{
 		for ( int j = 0; j < GRID_HEIGHT; j++)
 		{
 			System.out.print("|");
 			System.out.print(j);
-			for (int  i = 0 ; i < 10 ; i++)
+			for (int  i = 0 ; i < GRID_WIDTH ; i++)
 			{
 			//Iterate and print out the row.
-				
+
 				if ( cell[i][j].id.equals("EMPTY"))
 				{
 					System.out.print("|"); // "| " represents empty.
@@ -213,20 +217,17 @@ public class Cell{
 					System.out.print("F");
 				}
 			}
-		
+
 			System.out.print("|");
 			System.out.println(""); //Endcaps.
 		}
 	}
-	
-	
-	//Cell[][] cellRef;
-	
+
 	public void heroMoveUp(Cell[][] cell) //Try passing the cell array as an argument! //Try not using an argument!
 	{
 		destY = (Hero.getyPos() - 1);
-		
-		
+
+
 		//The reactions to the cell contents go here in each movement function. It is clunky and requires us to copy and paste, but it works.
 		//The next step is to make the responses to the cell contents, i.e. if it's a block, no movement happens. If it's a monster, the kill player function happens, etc.
 		if (cell[Hero.getxPos()][destY].id.equals("EMPTY"))
@@ -242,19 +243,23 @@ public class Cell{
 		if (cell[Hero.getxPos()][destY].id.equals("FOOD"))
 		{
 			System.out.println("Poisoned");
-			Hero.setyPos(Hero.getyPos());
+			Hero.poisonTime = 21;
+			Food.xFood = 0;
+			Food.yFood = 0;
+			Food.timeFood = 0;
+			Hero.setyPos(destY);
 		}
-		
-		
-		
-		
+
+
+
+
 		//printGrid
 	}
-	
+
 	void heroMoveDown(Cell[][] cell)
 	{
 		destY = (Hero.getyPos() + 1);
-		
+
 		if (cell[Hero.getxPos()][destY].id.equals("EMPTY"))
 		{
 			System.out.println("Empty cell registered! Movement possible!");
@@ -269,14 +274,18 @@ public class Cell{
 		if (cell[Hero.getxPos()][destY].id.equals("FOOD"))
 		{
 			System.out.println("Poisoned");
-			Hero.setyPos(Hero.getyPos());
+			Hero.poisonTime = 21;
+			Food.xFood = 0;
+			Food.yFood = 0;
+			Food.timeFood = 0;
+			Hero.setyPos(destY);
 		}
 	}
-	
+
 	void heroMoveLeft(Cell[][] cell)
 	{
 		destX = (Hero.getxPos() - 1);
-		
+
 		if (cell[destX][Hero.getyPos()].id.equals("EMPTY"))
 		{
 			System.out.println("Empty cell registered! Movement possible!");
@@ -290,15 +299,19 @@ public class Cell{
 		if (cell[destX][Hero.getyPos()].id.equals("FOOD"))
 		{
 			System.out.println("Poisoned");
-			Hero.setxPos(Hero.getxPos());
+			Hero.poisonTime = 21;
+			Food.xFood = 0;
+			Food.yFood = 0;
+			Food.timeFood = 0;
+			Hero.setxPos(destX);
 		}
-		
+
 	}
-	
+
 	void heroMoveRight(Cell[][] cell)
 	{
 		destX = (Hero.getxPos() + 1);
-		
+
 		if (cell[destX][Hero.getyPos()].id.equals("EMPTY"))
 		{
 			System.out.println("Empty cell registered! Movement possible!");
@@ -312,43 +325,263 @@ public class Cell{
 		if (cell[destX][Hero.getyPos()].id.equals("FOOD"))
 		{
 			System.out.println("Poisoned");
-			Hero.setxPos(Hero.getxPos());
+			Hero.poisonTime = 21;
+			Food.xFood = 0;
+			Food.yFood = 0;
+			Food.timeFood = 0;
+			Hero.setxPos(destX);
 		}
-		
-		
+
+
 	}
-	
+
 	void heroStill(Cell[][] cell)
 	{
 		Hero.setyPos(Hero.getyPos());
 		Hero.setxPos(Hero.getxPos());
 	}
+
 	
-	/*
-	void checkYdir(Cell[][] cellRef)
+	
+	//Movement of Monster 1 Start from here
+	
+	public void MonsterMove(Cell[][] cell)
 	{
-		if (cellRef[Hero.getxPos()][destY].id.equals("EMPTY"))
+		dir=r.nextInt(4);                         	//System will chose randomly from 0 -> 3 
+		if(dir==right)						    	//When system let monster 1 turn right
 		{
-			System.out.println("Empty cell registered! Movement possible!");
-		}
-	}
-	*/
-	/*
-	void checkXdir()
-	{
-		
-	}
-	*/
-	/*
-	void destroyFood()
-	{
-		if (Food.getFoodActive == false)
-		{
-			Food.setEmpty();
-		}
+			destX2 = (Monster.getxPos() + 1);
+			if (cell[destX2][Monster.getyPos()].id.equals("HERO"))    //Check if next step is Hero(player)
+			{
+				System.out.println("Player has been eaten by monster 1");
+				Monster.setxPos(destX2);
+				
+				
+			}
+			else if (cell[destX2][Monster.getyPos()].id.equals("EMPTY"))  // check if next step is Empty
+			{
+				System.out.println("Monster 1 Moved");
+				Monster.setxPos(destX2);
+			}
+			else if (cell[destX2][Monster.getyPos()].id.equals("BLOCK"))    // Check if next step is Block
+			{
+				System.out.println("Monster 1 can not step on block");
+				Monster.setxPos(Monster.getxPos());
+			}
 			
+			else if (cell[destX2][Monster.getyPos()].id.equals("FOOD"))    // Check if next step is Food
+			{
+				System.out.println("Monster 1 Poisoned");	
+			}
+			
+			
+		}
+		
+		if(dir==left)                                   //If system let monster turn left
+		{
+			destX2 = (Monster.getxPos() - 1);
+			
+			if (cell[destX2][Monster.getyPos()].id.equals("HERO"))   //Check if next step is Hero
+			{
+				System.out.println("Player has been eaten by monster 1");
+				Monster.setxPos(destX2);
+				
+				
+			}
+			else if (cell[destX2][Monster.getyPos()].id.equals("EMPTY"))   //check if next step is Empty
+			{
+				System.out.println("Monster 1 Moved");
+				Monster.setxPos(destX2);
+			}
+			else if (cell[destX2][Monster.getyPos()].id.equals("BLOCK"))   //Check if next step is Block
+			{
+				System.out.println("Monster 1 can not step on block");
+				Monster.setxPos(Monster.getxPos());
+			}
+			else if (cell[destX2][Monster.getyPos()].id.equals("FOOD"))    //Check if next Step is Food
+			{
+				System.out.println("Monster 1 Poisoned");
+			}
+			
+			
+		}
+		
+		if(dir==up)                               //If system let monster go up
+		{
+			destY2 = (Monster.getyPos() - 1);
+			
+			if (cell[Monster.getxPos()][destY2].id.equals("HERO"))    //check if next step is Player
+			{
+				System.out.println("Player has been eaten by monster 1");
+				Monster.setyPos(destY2);
+				
+				
+			}
+			else if (cell[Monster.getxPos()][destY2].id.equals("EMPTY"))   //check if next step is Empty
+			{
+				System.out.println("Monster 1 Moved");
+				Monster.setyPos(destY2);
+			}
+			else if (cell[Monster.getxPos()][destY2].id.equals("BLOCK"))  // check if next step is Block
+			{
+				System.out.println("Monster 1 can not step on block");
+				Monster.setyPos(Monster.getyPos());
+			}
+			else if (cell[Monster.getxPos()][destY2].id.equals("FOOD"))   //check if next step is Food
+			{
+				System.out.println("Monster 1 Poisoned");
+			}
+			
+			
+		}
+		
+		if(dir==down)										//if system let monster go down
+		{
+			destY2 = (Monster.getyPos() + 1);
+			
+			if (cell[Monster.getxPos()][destY2].id.equals("HERO"))     //check if next step is player
+			{
+				System.out.println("Player has been eaten by monster 1");
+				Monster.setyPos(destY2);
+				
+				
+			}
+			else if (cell[Monster.getxPos()][destY2].id.equals("EMPTY")) //check if next step is Empty
+			{
+				System.out.println("Monster 1 Moved");
+				Monster.setyPos(destY2);
+			}
+			else if (cell[Monster.getxPos()][destY2].id.equals("BLOCK"))  //check if next step is Block
+			{
+				System.out.println("Monster 1 can not step on block");
+				Monster.setyPos(Monster.getyPos()); 
+			}
+			else if (cell[Monster.getxPos()][destY2].id.equals("FOOD"))    //check if next step is food
+			{
+				System.out.println("Monster 1 Poisoned");		
+			}
+			
+		}
 	}
-*/
+	
+	//Movement of Monster 2 Start from here     The Structure is same as Monster 1
+	
+		public void MonsterMove2(Cell[][] cell)
+		{
+			dir=r.nextInt(4);
+			if(dir==right)
+			{
+				destX3 = (Monster.getxxPos() + 1);
+				
+				if (cell[destX3][Monster.getyyPos()].id.equals("HERO"))
+				{
+					System.out.println("Player has been eaten by monster 2");
+					Monster.setxxPos(destX3);
+					
+					
+				}
+				else if (cell[destX3][Monster.getyyPos()].id.equals("EMPTY"))
+				{
+					System.out.println("Monster 2 moved");
+					Monster.setxxPos(destX3);
+				}
+				else if (cell[destX3][Monster.getyyPos()].id.equals("BLOCK"))
+				{
+					System.out.println("Monster 2 can not step on block");
+					Monster.setxxPos(Monster.getxxPos());
+				}
+				else if (cell[destX3][Monster.getyyPos()].id.equals("FOOD"))
+				{
+					System.out.println("Monster 2 Poisoned");
+					
+				}
+				
+			}
+			
+			if(dir==left)
+			{
+				destX3 = (Monster.getxxPos() - 1);
+				
+				if (cell[destX3][Monster.getyyPos()].id.equals("HERO"))
+				{
+					System.out.println("Player has been eaten by monster 2");
+					Monster.setxxPos(destX3);
+					
+					
+				}
+				else if (cell[destX3][Monster.getyyPos()].id.equals("EMPTY"))
+				{
+					System.out.println("Monster 2 moved");
+					Monster.setxxPos(destX3);
+				}
+				else if (cell[destX3][Monster.getyyPos()].id.equals("BLOCK"))
+				{
+					System.out.println("Monster 2 can not step on block");
+					Monster.setxxPos(Monster.getxxPos());
+				}
+				else if (cell[destX3][Monster.getyyPos()].id.equals("FOOD"))
+				{
+					System.out.println("Monster 2 Poisoned");
+				}
+				
+			}
+			
+			if(dir==up)
+			{
+				destY3 = (Monster.getyyPos() - 1);
+				
+				if (cell[Monster.getxxPos()][destY3].id.equals("HERO"))
+				{
+					System.out.println("Player has been eaten by monster 2");
+					Monster.setyyPos(destY3);
+					
+					
+				}
+				else if (cell[Monster.getxxPos()][destY3].id.equals("EMPTY"))
+				{
+					System.out.println("Monster 2 moved");
+					Monster.setyyPos(destY3);
+				}
+				else if (cell[Monster.getxxPos()][destY3].id.equals("BLOCK"))
+				{
+					System.out.println("Monster 2 can not step on block");
+					Monster.setyyPos(Monster.getyyPos());
+				}
+				else if (cell[Monster.getxxPos()][destY3].id.equals("FOOD"))
+				{
+					System.out.println("Monster 2 Poisoned");
+				}
+				
+			}
+			
+			if(dir==down)
+			{
+				destY3 = (Monster.getyyPos() + 1);
+				
+				if (cell[Monster.getxxPos()][destY3].id.equals("HERO"))
+				{
+					System.out.println("Player has been eaten by monster 2");
+					Monster.setyyPos(destY3);
+					
+					
+				}
+				else if (cell[Monster.getxxPos()][destY3].id.equals("EMPTY"))
+				{
+					System.out.println("Monster 2 moved");
+					Monster.setyyPos(destY3);
+				}
+				else if (cell[Monster.getxxPos()][destY3].id.equals("BLOCK"))
+				{
+					System.out.println("Monster 2 can not step on block");
+					Monster.setyyPos(Monster.getyyPos());
+				}
+				else if (cell[Monster.getxxPos()][destY3].id.equals("FOOD"))
+				{
+					System.out.println("Monster 2 Poisoned");
+				}
+				
+				
+			}
+		}
 	
 }
-//test/////
