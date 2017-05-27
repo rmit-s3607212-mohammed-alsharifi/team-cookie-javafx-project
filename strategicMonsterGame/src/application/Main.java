@@ -2,6 +2,7 @@ package application;
 
 import java.util.Scanner;
 
+
 	public class Main
 	{
 		static int timeCount = 0;
@@ -242,19 +243,33 @@ private static boolean userLogin()
 		//Temporary method of obtaining the direction choice.
 		dirChoice = Integer.parseInt(reader.nextLine());
 
-			if(Hero.poisonTime > 0)	//Josh: if poison has been stood on
+
+		
+		
+		
+		
+		
+		
+		
+		
+		//===============================================//
+		//Vinh:  CASE 1 -- ONLY PLAYER POISONED //
+			if((Hero.poisonTime > 0) && (Monster.monsterPoisonTime == 0) && (Monster.monsterPoisonTime2 == 0))	//Josh: if poison has been stood on
 			{
-				if(Hero.poisonTime%2 == 1)	//and it is an odd turn
+				if(Hero.poisonTime%2 == 1)	//Josh: when poison time is an odd number, Hero won't move
 				{
 					Food.spawner = false;
 					cellRunGame.heroStill(playArea);
+					System.out.println("PLAYER IS POISONED, CAN NOT MOVE THIS TURN");
+					cellRunGame.MonsterMove(playArea);
+					cellRunGame.MonsterMove2(playArea);
 					timeAdvance();
 					runGame();
-				} //make hero stand still and advance a turn
+				} 
 		
-				else //if food has been stood on and it's an even turn
+				else 
 				{
-					switch(dirChoice) //let hero move or stand still
+					switch(dirChoice) 
 					{
 						case 1:
 							//Angus: Each case will trigger a Hero movement command. The other directions are identical in principle.
@@ -264,7 +279,7 @@ private static boolean userLogin()
 							//Runs the "heroMoveUp method within the cell class.
 							cellRunGame.heroMoveUp(playArea);
 							
-							//Danny: The movement functions of each monster are executed.
+							//Vinh: The movement functions of each monster are executed.
 							cellRunGame.MonsterMove(playArea);
 							cellRunGame.MonsterMove2(playArea);
 					
@@ -277,7 +292,7 @@ private static boolean userLogin()
 							break;
 
 						case 2:
-							Food.spawner = false;
+							Food.spawner = false;              //Vinh: From Case 2, all character move normally
 							cellRunGame.heroMoveLeft(playArea);
 							cellRunGame.MonsterMove(playArea);
 							cellRunGame.MonsterMove2(playArea);
@@ -326,9 +341,350 @@ private static boolean userLogin()
 					}
 				}
 			}
-			else if (Hero.poisonTime == 0) //Josh: if food hasn't been stood on
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			//====================================================//
+			//Vinh:  CASE 2 - ONLY MONSTER 1 POISONED //
+			if((Hero.poisonTime == 0) && (Monster.monsterPoisonTime > 0) && (Monster.monsterPoisonTime2 == 0))	
 			{
-				switch(dirChoice)	//advance as usual
+				
+				switch(dirChoice) 
+					{
+						case 1:
+							
+							if(Monster.monsterPoisonTime%2 == 1)              //Vinh: If time = odd number, Player and Monster 2 can move but Monster 1 have to stop
+							{
+								Food.spawner = false;
+								cellRunGame.heroMoveUp(playArea);
+								System.out.println("MONSTER IS POISONED, CAN NOT MOVE THIS TURN");
+								cellRunGame.MonsterMove2(playArea);
+								
+								timeAdvance();
+								runGame();
+								break;
+							}
+							else											//Vinh: If time = even number, Player and both monsters can move
+							{
+								Food.spawner = false;
+								cellRunGame.heroMoveUp(playArea);
+								cellRunGame.MonsterMove(playArea);
+								cellRunGame.MonsterMove2(playArea);
+								timeAdvance();
+								runGame();
+								break;
+							}
+
+						case 2:												//Vinh: From case 2, all is similar to case 1
+							if(Monster.monsterPoisonTime%2 == 1)
+							{
+								Food.spawner = false;
+								cellRunGame.heroMoveLeft(playArea);
+								System.out.println("MONSTER IS POISONED, CAN NOT MOVE THIS TURN");
+								cellRunGame.MonsterMove2(playArea);
+								
+								timeAdvance();
+								runGame();
+								break;
+							}
+							else
+							{
+								Food.spawner = false;
+								cellRunGame.heroMoveLeft(playArea);
+								cellRunGame.MonsterMove(playArea);
+								cellRunGame.MonsterMove2(playArea);
+								timeAdvance();
+								runGame();
+								break;
+							}
+						case 3:
+							
+							if(Monster.monsterPoisonTime%2 == 1)
+							{
+								Food.spawner = false;
+								cellRunGame.heroMoveRight(playArea);
+								System.out.println("MONSTER IS POISONED, CAN NOT MOVE THIS TURN");
+								cellRunGame.MonsterMove2(playArea);
+						
+								timeAdvance();
+								runGame();
+								break;
+							}
+							else
+							{
+								Food.spawner = false;
+								cellRunGame.heroMoveRight(playArea);
+								cellRunGame.MonsterMove(playArea);
+								cellRunGame.MonsterMove2(playArea);
+								timeAdvance();
+								runGame();
+								break;
+							}
+						case 4:
+							
+							if(Monster.monsterPoisonTime%2 == 1)
+							{
+								Food.spawner = false;
+								cellRunGame.heroMoveDown(playArea);
+								System.out.println("MONSTER IS POISONED, CAN NOT MOVE THIS TURN");
+								cellRunGame.MonsterMove2(playArea);
+								
+								timeAdvance();
+								runGame();
+								break;
+							}
+							else
+							{
+								Food.spawner = false;
+								cellRunGame.heroMoveDown(playArea);
+								cellRunGame.MonsterMove(playArea);
+								cellRunGame.MonsterMove2(playArea);
+								timeAdvance();
+								runGame();
+								break;
+							}
+						case 5 :
+							
+							if(Monster.monsterPoisonTime%2 == 1)
+							{
+								Food.spawner = false;
+								cellRunGame.heroStill(playArea);
+								System.out.println("MONSTER IS POISONED, CAN NOT MOVE THIS TURN");
+								cellRunGame.MonsterMove2(playArea);
+								
+								timeAdvance();
+								runGame();
+
+								break;
+							}
+							else
+							{
+								Food.spawner = false;
+								cellRunGame.heroStill(playArea);
+								cellRunGame.MonsterMove(playArea);
+								cellRunGame.MonsterMove2(playArea);
+								timeAdvance();
+								runGame();
+
+								break;
+							}
+						case 6 :
+							if(Monster.monsterPoisonTime%2 == 1)
+							{
+								Food.spawner = true;
+								cellRunGame.heroStill(playArea);
+								System.out.println("MONSTER IS POISONED, CAN NOT MOVE THIS TURN");
+								cellRunGame.MonsterMove2(playArea);
+								
+								timeAdvance();
+								runGame();
+
+								break;
+							}
+							else
+							{
+								Food.spawner = true;
+								cellRunGame.heroStill(playArea);
+								cellRunGame.MonsterMove(playArea);
+								cellRunGame.MonsterMove2(playArea);
+								timeAdvance();
+								runGame();
+
+								break;
+							}
+						case 7 :
+							loadGameMenu();
+						default : break;
+					}
+				
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			//==========================================//
+			//CASE 3 -- ONLY MONSTER 2 POISONED   --- Structure is same as Case 2, just only changed between M1 and M2//
+			if((Hero.poisonTime == 0) && (Monster.monsterPoisonTime == 0) && (Monster.monsterPoisonTime2 > 0))	
+			{
+				
+				
+				
+					switch(dirChoice) 
+					{
+						case 1:
+							
+							if(Monster.monsterPoisonTime2%2 == 1)
+							{
+								Food.spawner = false;
+								cellRunGame.heroMoveUp(playArea);
+								cellRunGame.MonsterMove(playArea);
+								System.out.println("MONSTER2 IS POISONED, CAN NOT MOVE THIS TURN");
+								timeAdvance();
+								runGame();
+								break;
+							}
+							else
+							{
+								Food.spawner = false;
+								cellRunGame.heroMoveUp(playArea);
+								cellRunGame.MonsterMove(playArea);
+								cellRunGame.MonsterMove2(playArea);
+								timeAdvance();
+								runGame();
+								break;
+							}
+
+						case 2:
+							if(Monster.monsterPoisonTime2%2 == 1)
+							{
+								Food.spawner = false;
+								cellRunGame.heroMoveLeft(playArea);
+								cellRunGame.MonsterMove(playArea);
+								System.out.println("MONSTER2 IS POISONED, CAN NOT MOVE THIS TURN");
+								timeAdvance();
+								runGame();
+								break;
+							}
+							else
+							{
+								Food.spawner = false;
+								cellRunGame.heroMoveLeft(playArea);
+								cellRunGame.MonsterMove(playArea);
+								cellRunGame.MonsterMove2(playArea);
+								timeAdvance();
+								runGame();
+								break;
+							}
+						case 3:
+							
+							if(Monster.monsterPoisonTime2%2 == 1)
+							{
+								Food.spawner = false;
+								cellRunGame.heroMoveRight(playArea);
+								cellRunGame.MonsterMove(playArea);
+								System.out.println("MONSTER2 IS POISONED, CAN NOT MOVE THIS TURN");
+								timeAdvance();
+								runGame();
+
+								break;
+							}
+							else
+							{
+								Food.spawner = false;
+								cellRunGame.heroMoveRight(playArea);
+								cellRunGame.MonsterMove(playArea);
+								cellRunGame.MonsterMove2(playArea);
+								timeAdvance();
+								runGame();
+
+								break;
+							}
+						case 4:
+							
+							if(Monster.monsterPoisonTime2%2 == 1)
+							{
+								Food.spawner = false;
+								cellRunGame.heroMoveDown(playArea);
+								cellRunGame.MonsterMove(playArea);
+								System.out.println("MONSTER2 IS POISONED, CAN NOT MOVE THIS TURN");
+								timeAdvance();
+								runGame();
+
+								break;
+							}
+							else
+							{
+								Food.spawner = false;
+								cellRunGame.heroMoveDown(playArea);
+								cellRunGame.MonsterMove(playArea);
+								cellRunGame.MonsterMove2(playArea);
+								timeAdvance();
+								runGame();
+
+								break;
+							}
+						case 5 :
+							
+							if(Monster.monsterPoisonTime2%2 == 1)
+							{
+								Food.spawner = false;
+								cellRunGame.heroStill(playArea);
+								cellRunGame.MonsterMove(playArea);
+								System.out.println("MONSTER2 IS POISONED, CAN NOT MOVE THIS TURN");
+								timeAdvance();
+								runGame();
+
+								break;
+							}
+							else
+							{
+								Food.spawner = false;
+								cellRunGame.heroStill(playArea);
+								cellRunGame.MonsterMove(playArea);
+								cellRunGame.MonsterMove2(playArea);
+								timeAdvance();
+								runGame();
+
+								break;
+							}
+						case 6 :
+							if(Monster.monsterPoisonTime2%2 == 1)
+							{
+								Food.spawner = true;
+								cellRunGame.heroStill(playArea);
+								cellRunGame.MonsterMove(playArea);
+								System.out.println("MONSTER2 IS POISONED, CAN NOT MOVE THIS TURN");
+								timeAdvance();
+								runGame();
+
+								break;
+							}
+							else
+							{
+								Food.spawner = true;
+								cellRunGame.heroStill(playArea);
+								cellRunGame.MonsterMove(playArea);
+								cellRunGame.MonsterMove2(playArea);
+								timeAdvance();
+								runGame();
+
+								break;
+							}
+						case 7 :
+							loadGameMenu();
+						default : break;
+					}
+				
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			else                     //Vinh: No one step on Food
+			{
+				switch(dirChoice)
 				{
 					case 1:
 						Food.spawner = false;
@@ -409,6 +765,22 @@ private static boolean userLogin()
 			Hero.poisonTime--;	//count down poison
 			System.out.println("Poison timer is: " + Hero.poisonTime);
 		}
+		
+		
+		
+		if(Monster.monsterPoisonTime > 0)
+		{
+			Monster.monsterPoisonTime--;	//count down poison M1
+			System.out.println("Monster1 Poison timer is: " + Monster.monsterPoisonTime);
+		}
+		
+		if(Monster.monsterPoisonTime2 > 0)
+		{
+			Monster.monsterPoisonTime2--;	//count down poison M2
+			System.out.println("Monster2 Poison timer is: " + Monster.monsterPoisonTime2);
+		}
+		
+		
 		
 		//Angus: The player achieves victory when they survive for 100 turns.
 		if (timeCount >= 100)
