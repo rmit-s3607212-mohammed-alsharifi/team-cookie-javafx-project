@@ -115,8 +115,8 @@ public class Cell{
 
 		}
 
-		cell[Monster.getxPos()][Monster.getyPos()] = new Monster(Monster.getxPos() ,Monster.getyPos());
-		cell[Monster2.getxxPos()][Monster2.getyyPos()] = new Monster2(Monster2.getxxPos() ,Monster2.getyyPos());
+		cell[Monster.getxPos()][Monster.getyPos()] = new Monster(Monster.getxPos() ,Monster.getyPos());  //Vinh: Create Monster1 in position 3,3
+		cell[Monster.getxxPos()][Monster.getyyPos()] = new Monster(Monster.getxxPos() ,Monster.getyyPos()); //Vinh: Create Monster 2 in position 3,5
 		cell[Hero.getxPos()][Hero.getyPos()] = new Hero(Hero.getxPos() ,Hero.getyPos()); //It was 6,6 orginally
 
 		
@@ -170,17 +170,13 @@ public class Cell{
 					System.out.print("|"); // "| " represents empty.
 					System.out.print(" ");
 				}
-				else if (cell[i][j].id.equals("MONSTER")) // Just like my code.
+				else if (cell[i][j].id.equals("MONSTER")) // Print out the Monsters
 				{
 					System.out.print("|");
-					System.out.print("&");
+					System.out.print("M");
 				}
 				
-				else if (cell[i][j].id.equals("MONSTER2")) // Just like my code.
-				{
-					System.out.print("|");
-					System.out.print("$");
-				}
+				
 				
 				else if (cell[i][j].id.equals("HERO"))
 				{
@@ -223,10 +219,10 @@ public class Cell{
 		if (cell[Hero.getxPos()][destY].id.equals("FOOD"))
 		{
 			System.out.println("Poisoned");
-			Hero.poisonTime = 21;	//Josh: sets duration of player slow
-			Food.xFood = 0;			//despawning of food
-			Food.yFood = 0;			//^
-			Food.timeFood = 0;		//^^
+			Hero.poisonTime = 21;	
+			Food.xFood = 0;			
+			Food.yFood = 0;			
+			Food.timeFood = 0;		
 			Hero.setyPos(destY);
 		}
 	}
@@ -318,124 +314,151 @@ public class Cell{
 	}
 
 	
-	
-	//Movement of Monster 1 Start from here
+	//=======================================Movement Of Monster 1=====================================//
+	// Vinh: Movement of Monster 1 Start from here
 	public void MonsterMove(Cell[][] cell)
 	{
-		dir=r.nextInt(4);                         	//System will chose randomly from 0 -> 3 
-		if(dir==right)						    	//When system let monster 1 turn right
+		dir=r.nextInt(4);                         						//Vinh: System will chose randomly from 0 -> 3 
+		if(dir==right)						    						//Vinh: When system let monster 1 turn right
 		{
-			destX2 = (Monster.getxPos() + 1);
-			if (cell[destX2][Monster.getyPos()].id.equals("HERO"))    //Check if next step is Hero(player)
+			destX2 = (Monster.getxPos() + 1);	
+			if (cell[destX2][Monster.getyPos()].id.equals("HERO"))    	//Vinh: Check if next step is Hero(player)
 			{
 				System.out.println("Player has been eaten by monster 1");
 				Monster.setxPos(destX2);
 			}
-			else if (cell[destX2][Monster.getyPos()].id.equals("EMPTY"))  // check if next step is Empty
+			else if (cell[destX2][Monster.getyPos()].id.equals("EMPTY"))  //Vinh: Check if next step is Empty
 			{
 				System.out.println("Monster 1 Moved");
 				Monster.setxPos(destX2);
 			}
-			else if (cell[destX2][Monster.getyPos()].id.equals("BLOCK"))    // Check if next step is Block
+			else if (cell[destX2][Monster.getyPos()].id.equals("BLOCK"))    //Vinh: Check if next step is Block
 			{
 				System.out.println("Monster 1 can not step on block");
 				Monster.setxPos(Monster.getxPos());
 			}
 			
-			else if (cell[destX2][Monster.getyPos()].id.equals("FOOD"))    // Check if next step is Food
+			else if (cell[destX2][Monster.getyPos()].id.equals("FOOD"))    //Vinh: Check if next step is Food
 			{
-				System.out.println("Monster 1 Poisoned");	
+				System.out.println("Monster 1 Poisoned");
+				Monster.monsterPoisonTime = 21;								//Vinh: Set the poison time 
+				Food.xFood = 0;
+				Food.yFood = 0;
+				Food.timeFood = 0;
+				Monster.setxPos(destX2);
 			}
 		}
 		
-		if(dir==left) //If system let monster turn left
+		if(dir==left) 														//Vinh: If system let monster turn left
 		{
 			destX2 = (Monster.getxPos() - 1);
 			
-			if (cell[destX2][Monster.getyPos()].id.equals("HERO"))   //Check if next step is Hero
+			if (cell[destX2][Monster.getyPos()].id.equals("HERO"))   		//Vinh: Check if next step is Hero
 			{
 				System.out.println("Player has been eaten by monster 1");
 				Monster.setxPos(destX2);
 				
 				
 			}
-			else if (cell[destX2][Monster.getyPos()].id.equals("EMPTY"))   //check if next step is Empty
+			else if (cell[destX2][Monster.getyPos()].id.equals("EMPTY"))   //Vinh: Check if next step is Empty
 			{
 				System.out.println("Monster 1 Moved");
 				Monster.setxPos(destX2);
 			}
-			else if (cell[destX2][Monster.getyPos()].id.equals("BLOCK"))   //Check if next step is Block
+			else if (cell[destX2][Monster.getyPos()].id.equals("BLOCK"))   //Vinh: Check if next step is Block
 			{
 				System.out.println("Monster 1 can not step on block");
 				Monster.setxPos(Monster.getxPos());
 			}
-			else if (cell[destX2][Monster.getyPos()].id.equals("FOOD"))    //Check if next Step is Food
+			else if (cell[destX2][Monster.getyPos()].id.equals("FOOD"))    //Vinh: Check if next Step is Food
 			{
 				System.out.println("Monster 1 Poisoned");
+				Monster.monsterPoisonTime = 21;
+				Food.xFood = 0;
+				Food.yFood = 0;
+				Food.timeFood = 0;
+				Monster.setxPos(destX2);
 			}
 			
 			
 		}
 		
-		if(dir==up)                               //If system let monster go up
+		if(dir==up)                               							//Vinh: If system let monster go up
 		{
 			destY2 = (Monster.getyPos() - 1);
 			
-			if (cell[Monster.getxPos()][destY2].id.equals("HERO"))    //check if next step is Player
+			if (cell[Monster.getxPos()][destY2].id.equals("HERO"))    		//Vinh: Check if next step is Player
 			{
 				System.out.println("Player has been eaten by monster 1");
 				Monster.setyPos(destY2);
 				
 				
 			}
-			else if (cell[Monster.getxPos()][destY2].id.equals("EMPTY"))   //check if next step is Empty
+			else if (cell[Monster.getxPos()][destY2].id.equals("EMPTY"))   //Vinh: Check if next step is Empty
 			{
 				System.out.println("Monster 1 Moved");
 				Monster.setyPos(destY2);
 			}
-			else if (cell[Monster.getxPos()][destY2].id.equals("BLOCK"))  // check if next step is Block
+			else if (cell[Monster.getxPos()][destY2].id.equals("BLOCK"))  //Vinh: Check if next step is Block
 			{
 				System.out.println("Monster 1 can not step on block");
 				Monster.setyPos(Monster.getyPos());
 			}
-			else if (cell[Monster.getxPos()][destY2].id.equals("FOOD"))   //check if next step is Food
+			else if (cell[Monster.getxPos()][destY2].id.equals("FOOD"))   //Vinh: Check if next step is Food
 			{
 				System.out.println("Monster 1 Poisoned");
+				Monster.monsterPoisonTime = 21;
+				Food.xFood = 0;
+				Food.yFood = 0;
+				Food.timeFood = 0;
+				Monster.setyPos(destY2);
 			}
 			
 			
 		}
 		
-		if(dir==down)										//if system let monster go down
+		if(dir==down)										//Vinh: If system let monster go down
 		{
 			destY2 = (Monster.getyPos() + 1);
 			
-			if (cell[Monster.getxPos()][destY2].id.equals("HERO"))     //check if next step is player
+			if (cell[Monster.getxPos()][destY2].id.equals("HERO"))     //Vinh: Check if next step is player
 			{
 				System.out.println("Player has been eaten by monster 1");
 				Monster.setyPos(destY2);
 				
 				
 			}
-			else if (cell[Monster.getxPos()][destY2].id.equals("EMPTY")) //check if next step is Empty
+			else if (cell[Monster.getxPos()][destY2].id.equals("EMPTY")) //Vinh: Check if next step is Empty
 			{
 				System.out.println("Monster 1 Moved");
 				Monster.setyPos(destY2);
 			}
-			else if (cell[Monster.getxPos()][destY2].id.equals("BLOCK"))  //check if next step is Block
+			else if (cell[Monster.getxPos()][destY2].id.equals("BLOCK"))  //Vinh: Check if next step is Block
 			{
 				System.out.println("Monster 1 can not step on block");
 				Monster.setyPos(Monster.getyPos()); 
 			}
-			else if (cell[Monster.getxPos()][destY2].id.equals("FOOD"))    //check if next step is food
+			else if (cell[Monster.getxPos()][destY2].id.equals("FOOD"))    //Vinh: Check if next step is food
 			{
-				System.out.println("Monster 1 Poisoned");		
+				System.out.println("Monster 1 Poisoned");
+				Monster.monsterPoisonTime = 21;
+				Food.xFood = 0;
+				Food.yFood = 0;
+				Food.timeFood = 0;
+				Monster.setyPos(destY2);		
 			}
 			
 		}
 	}
 	
-	//Movement of Monster 2 Start from here     The Structure is same as Monster 1
+	
+	
+	
+	
+	
+	
+	//=========================================Movement Of Monster2===============================//
+	//Vinh:   Movement of Monster 2 Start from here  -----  The Structure is same as Monster 1
 	
 		public void MonsterMove2(Cell[][] cell)
 		{
@@ -464,6 +487,11 @@ public class Cell{
 				else if (cell[destX3][Monster.getyyPos()].id.equals("FOOD"))
 				{
 					System.out.println("Monster 2 Poisoned");
+					Monster.monsterPoisonTime2 = 21;
+					Food.xFood = 0;
+					Food.yFood = 0;
+					Food.timeFood = 0;
+					Monster.setxxPos(destX3);	
 					
 				}
 				
@@ -493,6 +521,11 @@ public class Cell{
 				else if (cell[destX3][Monster.getyyPos()].id.equals("FOOD"))
 				{
 					System.out.println("Monster 2 Poisoned");
+					Monster.monsterPoisonTime2 = 21;
+					Food.xFood = 0;
+					Food.yFood = 0;
+					Food.timeFood = 0;
+					Monster.setxxPos(destX3);	
 				}
 				
 			}
@@ -521,6 +554,11 @@ public class Cell{
 				else if (cell[Monster.getxxPos()][destY3].id.equals("FOOD"))
 				{
 					System.out.println("Monster 2 Poisoned");
+					Monster.monsterPoisonTime2 = 21;
+					Food.xFood = 0;
+					Food.yFood = 0;
+					Food.timeFood = 0;
+					Monster.setyyPos(destY3);	
 				}
 				
 			}
@@ -549,6 +587,11 @@ public class Cell{
 				else if (cell[Monster.getxxPos()][destY3].id.equals("FOOD"))
 				{
 					System.out.println("Monster 2 Poisoned");
+					Monster.monsterPoisonTime2 = 21;
+					Food.xFood = 0;
+					Food.yFood = 0;
+					Food.timeFood = 0;
+					Monster.setyyPos(destY3);	
 				}
 				
 				
