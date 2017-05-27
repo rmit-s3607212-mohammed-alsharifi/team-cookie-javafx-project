@@ -11,30 +11,17 @@ public class Food extends Cell
 
 	public Food (int x, int y, int time)
 	{
-		this.id = "FOOD";
+		this.id = "FOOD"; 
 		xFood = x;
 		yFood = y;
 		timeFood = time;
 		int foodDestX;
 		int foodDestY;
 	}
+	//allows placement in grid and sets the despawn time
 
-
-
-	public static int getxFood()
-	{
-		return xFood;
-	}
-
-	public static int getyFood()
-	{
-		return yFood;
-	}
-	public static int getFoodTime()
-	{
-		return timeFood;
-	}
-
+	
+	//setting food spawn location to hero location
 	public static void setFoodSpawnX()
 	{
 		foodDestX = Hero.xPos;
@@ -54,4 +41,4 @@ public class Food extends Cell
 	{
 		return foodDestY;
 	}
-}/////
+}

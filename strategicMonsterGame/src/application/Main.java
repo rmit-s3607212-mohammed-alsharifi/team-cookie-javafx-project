@@ -216,7 +216,7 @@ private static boolean userLogin()
                      break;
             case 2:  System.out.println("View Results");
             	     break;
-            case 3:  System.out.println("End Game");
+            case 3:  System.out.println("Press one 1 for up, 2 for left, 3 for right, 4 for down! 5 to stay stationary!, 6 to place food, 7 to exit!");
             		 break;
             default: break;
         }
@@ -241,20 +241,20 @@ private static boolean userLogin()
 
 
 
-		while(dirChoice != 7){
-			if(Hero.poisonTime > 0)
+		//while(dirChoice != 7){
+			if(Hero.poisonTime > 0)	//if poison has been stood on
 			{
-				if(Hero.poisonTime%2 == 1)
+				if(Hero.poisonTime%2 == 1)	//and it is an odd turn
 				{
 					Food.spawner = false;
 					cellRunGame.heroStill(playArea);
 					timeAdvance();
 					runGame();
-				}
+				} //make hero stand still and advance a turn
 		
-				else
+				else //if food has been stood on and it's an even turn
 				{
-					switch(dirChoice)
+					switch(dirChoice) //let hero move or stand still
 					{
 						case 1:
 							Food.spawner = false;
@@ -319,14 +319,15 @@ private static boolean userLogin()
 
 
 
-						case 7 : break;
+						case 7 :
+							loadGameMenu();
 						default : break;
 					}
 				}
 			}
-			else if (Hero.poisonTime == 0)
+			else if (Hero.poisonTime == 0) //if food hasn't been stood on
 			{
-				switch(dirChoice)
+				switch(dirChoice)	//advance as usual
 				{
 					case 1:
 						Food.spawner = false;
@@ -390,11 +391,12 @@ private static boolean userLogin()
 
 
 
-					case 7 : break;
+					case 7 : 
+						loadGameMenu();
 					default : break;
 				}
 			}
-		}
+		//}
 	}
 
 
@@ -411,10 +413,17 @@ private static boolean userLogin()
 		if(Food.timeFood > 0)
 		System.out.println("The remaining food time is" + Food.timeFood);
 
-		if(Hero.poisonTime > 0)
+		if(Hero.poisonTime > 0) //if poison is active
 		{
-			Hero.poisonTime--;
+			Hero.poisonTime--;	//count down poison
 			System.out.println("Poison timer is: " + Hero.poisonTime);
 		}
+		
+		if (timeCount >= 100)
+		{
+			System.out.println("Winner!");
+			loadGameMenu();
+		}
+		
 	}
-}/////
+}
