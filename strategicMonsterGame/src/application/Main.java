@@ -253,7 +253,7 @@ private static boolean userLogin()
 		
 		
 		//===============================================//
-		//Vinh:  CASE 1 -- ONLY PLAYER POISONED //
+		//ANGUD+JOSH:  CASE 1 -- ONLY PLAYER POISONED //
 			if((Hero.poisonTime > 0) && (Monster.monsterPoisonTime == 0) && (Monster.monsterPoisonTime2 == 0))	//Josh: if poison has been stood on
 			{
 				if(Hero.poisonTime%2 == 1)	//Josh: when poison time is an odd number, Hero won't move
@@ -353,7 +353,7 @@ private static boolean userLogin()
 			
 			
 			//====================================================//
-			//Vinh:  CASE 2 - ONLY MONSTER 1 POISONED //
+			//Vinh+JOSH:  CASE 2 - ONLY MONSTER 1 POISONED //
 			if((Hero.poisonTime == 0) && (Monster.monsterPoisonTime > 0) && (Monster.monsterPoisonTime2 == 0))	
 			{
 				
@@ -518,7 +518,7 @@ private static boolean userLogin()
 			
 			
 			//==========================================//
-			//CASE 3 -- ONLY MONSTER 2 POISONED   --- Structure is same as Case 2, just only changed between M1 and M2//
+			//VINH+JOSH: CASE 3 -- ONLY MONSTER 2 POISONED   --- Structure is same as Case 2, just only changed between M1 and M2//
 			if((Hero.poisonTime == 0) && (Monster.monsterPoisonTime == 0) && (Monster.monsterPoisonTime2 > 0))	
 			{
 				
@@ -682,7 +682,7 @@ private static boolean userLogin()
 			
 			
 			
-			else                     //Vinh: No one step on Food
+			else                     //JOSH: No one step on Food
 			{
 				switch(dirChoice)
 				{
